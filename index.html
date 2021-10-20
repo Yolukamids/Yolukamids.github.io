@@ -112,7 +112,100 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yolukami.com/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" data-id="ckuzhh2ae0002j4onf8klavww" class="article-share-link">Share</a>
+      <a data-url="http://yolukami.com/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" data-id="ckuzqm7kr0002pcon8hu809qg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据分析流程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/" class="article-date">
+  <time datetime="2021-09-12T16:00:00.000Z" itemprop="datePublished">2021-09-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/">数据分析流程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="数据分析的一般流程"><a href="#数据分析的一般流程" class="headerlink" title="数据分析的一般流程"></a>数据分析的一般流程</h3><p>1.提取数据（筛选）</p>
+<ul>
+<li>布尔索引</li>
+<li><code>query()</code>：相当于布尔索引</li>
+<li><code>drop()</code>：删除指定的行或列</li>
+<li><code>rename()</code>：重命名行或列索引</li>
+<li><code>reset_index()</code>：重制索引（将索引变成普通列）</li>
+<li><code>set_index()</code>：设置索引（将一个列或多个列指定为索引）</li>
+<li><code>reindex()</code>：调整行或列索引的顺序（还可以做花式索引）</li>
+</ul>
+<p>2.整合和重塑</p>
+<ul>
+<li><code>merge()</code>：实现两个DataFrame对象的内连接或外连接（适用于两张表有关联）。</li>
+<li><code>concat()</code>：将两个或多个DataFrame的数据拼接到一起（适用于多张表结构一致）。</li>
+</ul>
+<p>3.数据清洗（缺失值、重复值、异常值）</p>
+<ul>
+<li>缺失值：<ul>
+<li><code>dropna()</code>：删除空值</li>
+<li><code>fillna()</code>：填充空值 &lt;— 均值、中位数、众数</li>
+<li><code>isnull()</code> / <code>notnull()</code>：判断空值</li>
+</ul>
+</li>
+<li>重复值：<ul>
+<li><code>duplication()</code>：判断是否重复</li>
+<li><code>drop_duplication</code>：删除重复值</li>
+</ul>
+</li>
+<li>异常值：<ul>
+<li>异常值 / 极端值 / 离群值</li>
+<li><code>drop()</code>：删除</li>
+<li><code>replace()</code>：替换</li>
+</ul>
+</li>
+<li>预处理：<ul>
+<li><code>apply()</code>：将函数作用到数据上，需要指定在哪个轴上执行</li>
+<li><code>transform</code>：将（多个）函数作用到数据上</li>
+<li><code>applymap()</code>：对每个元素使用指定的函数进行映射，相当于<code>Series</code>上的<code>map()</code>方法 —-&gt; elementwise</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意：这三个方法都是高阶函数的用法，<code>apply()</code>方法接受的函数，可以是带归约性质的函数（聚合函数），也可以是没有归约性质的函数。<code>transform()</code>方法接受的函数不能是带归约功能的函数，只能是对数据做变换的函数，简单的说就是函数的执行不会减少数据的量。</p>
+</blockquote>
+<p>4.数据透视（排序、分组、聚合）</p>
+<ul>
+<li>透视表：根据A统计B（根据A列对数据进行分组，再对B列上聚合函数）</li>
+<li><code>groupby()</code>  —&gt;  <code>sum()</code> /<code>mean()</code>/ <code>max()</code> /…..</li>
+<li><code>pivot_table()</code>   —&gt;  专门生成透视表的函数</li>
+<li><code>cut()</code> —&gt;  数据离散化（分箱）</li>
+</ul>
+<p>5.数据可视化（统计图表）</p>
+<p>6.数据的洞察（发现问题给出建议）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yolukami.com/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/" data-id="ckuzqm7kt0004pcon1fbgfrje" class="article-share-link">Share</a>
       
       
     </footer>
@@ -161,7 +254,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yolukami.com/2021/09/11/hello-world/" data-id="ckuzhh2a80000j4ondsuj6o8u" class="article-share-link">Share</a>
+      <a data-url="http://yolukami.com/2021/09/11/hello-world/" data-id="ckuzqm7js0000pconegza9rvb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -278,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yolukami.com/2021/07/13/markdown%E8%AF%AD%E6%B3%95/" data-id="ckuzhh2ad0001j4ongluc653v" class="article-share-link">Share</a>
+      <a data-url="http://yolukami.com/2021/07/13/markdown%E8%AF%AD%E6%B3%95/" data-id="ckuzqm7kp0001pcon6iedg31b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -298,7 +391,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">Python算法入门</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">markdown基本语法</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">Python算法入门</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">markdown基本语法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></li></ul>
     </div>
   </div>
 
@@ -327,6 +420,10 @@
         
           <li>
             <a href="/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">基础排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/">数据分析流程</a>
           </li>
         
           <li>

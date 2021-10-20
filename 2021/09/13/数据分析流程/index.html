@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>数据分析流程 | technology-column of Yolukami</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="数据分析的一般流程1.提取数据（筛选）  布尔索引 query()：相当于布尔索引 drop()：删除指定的行或列 rename()：重命名行或列索引 reset_index()：重制索引（将索引变成普通列） set_index()：设置索引（将一个列或多个列指定为索引） reindex()：调整行或列索引的顺序（还可以做花式索引）  2.整合和重塑  merge()：实现两个DataFrame对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析流程">
+<meta property="og:url" content="http://yolukami.com/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="technology-column of Yolukami">
+<meta property="og:description" content="数据分析的一般流程1.提取数据（筛选）  布尔索引 query()：相当于布尔索引 drop()：删除指定的行或列 rename()：重命名行或列索引 reset_index()：重制索引（将索引变成普通列） set_index()：设置索引（将一个列或多个列指定为索引） reindex()：调整行或列索引的顺序（还可以做花式索引）  2.整合和重塑  merge()：实现两个DataFrame对">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-09-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-20T14:14:12.972Z">
+<meta property="article:author" content="Yolukami">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="technology-column of Yolukami" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">technology-column of Yolukami</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yolukami.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-数据分析流程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/" class="article-date">
+  <time datetime="2021-09-12T16:00:00.000Z" itemprop="datePublished">2021-09-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      数据分析流程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="数据分析的一般流程"><a href="#数据分析的一般流程" class="headerlink" title="数据分析的一般流程"></a>数据分析的一般流程</h3><p>1.提取数据（筛选）</p>
+<ul>
+<li>布尔索引</li>
+<li><code>query()</code>：相当于布尔索引</li>
+<li><code>drop()</code>：删除指定的行或列</li>
+<li><code>rename()</code>：重命名行或列索引</li>
+<li><code>reset_index()</code>：重制索引（将索引变成普通列）</li>
+<li><code>set_index()</code>：设置索引（将一个列或多个列指定为索引）</li>
+<li><code>reindex()</code>：调整行或列索引的顺序（还可以做花式索引）</li>
+</ul>
+<p>2.整合和重塑</p>
+<ul>
+<li><code>merge()</code>：实现两个DataFrame对象的内连接或外连接（适用于两张表有关联）。</li>
+<li><code>concat()</code>：将两个或多个DataFrame的数据拼接到一起（适用于多张表结构一致）。</li>
+</ul>
+<p>3.数据清洗（缺失值、重复值、异常值）</p>
+<ul>
+<li>缺失值：<ul>
+<li><code>dropna()</code>：删除空值</li>
+<li><code>fillna()</code>：填充空值 &lt;— 均值、中位数、众数</li>
+<li><code>isnull()</code> / <code>notnull()</code>：判断空值</li>
+</ul>
+</li>
+<li>重复值：<ul>
+<li><code>duplication()</code>：判断是否重复</li>
+<li><code>drop_duplication</code>：删除重复值</li>
+</ul>
+</li>
+<li>异常值：<ul>
+<li>异常值 / 极端值 / 离群值</li>
+<li><code>drop()</code>：删除</li>
+<li><code>replace()</code>：替换</li>
+</ul>
+</li>
+<li>预处理：<ul>
+<li><code>apply()</code>：将函数作用到数据上，需要指定在哪个轴上执行</li>
+<li><code>transform</code>：将（多个）函数作用到数据上</li>
+<li><code>applymap()</code>：对每个元素使用指定的函数进行映射，相当于<code>Series</code>上的<code>map()</code>方法 —-&gt; elementwise</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意：这三个方法都是高阶函数的用法，<code>apply()</code>方法接受的函数，可以是带归约性质的函数（聚合函数），也可以是没有归约性质的函数。<code>transform()</code>方法接受的函数不能是带归约功能的函数，只能是对数据做变换的函数，简单的说就是函数的执行不会减少数据的量。</p>
+</blockquote>
+<p>4.数据透视（排序、分组、聚合）</p>
+<ul>
+<li>透视表：根据A统计B（根据A列对数据进行分组，再对B列上聚合函数）</li>
+<li><code>groupby()</code>  —&gt;  <code>sum()</code> /<code>mean()</code>/ <code>max()</code> /…..</li>
+<li><code>pivot_table()</code>   —&gt;  专门生成透视表的函数</li>
+<li><code>cut()</code> —&gt;  数据离散化（分箱）</li>
+</ul>
+<p>5.数据可视化（统计图表）</p>
+<p>6.数据的洞察（发现问题给出建议）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yolukami.com/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/" data-id="ckuzqm7kt0004pcon1fbgfrje" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          基础排序算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/09/11/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">Python算法入门</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">markdown基本语法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">基础排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/">数据分析流程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/11/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/07/13/markdown%E8%AF%AD%E6%B3%95/">markdown使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yolukami<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
