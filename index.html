@@ -64,6 +64,157 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据分析流程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/" class="article-date">
+  <time datetime="2021-09-12T16:00:00.000Z" itemprop="datePublished">2021-09-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/">数据分析流程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="数据分析的一般流程"><a href="#数据分析的一般流程" class="headerlink" title="数据分析的一般流程"></a>数据分析的一般流程</h3><p>1.提取数据（筛选）</p>
+<ul>
+<li>布尔索引</li>
+<li><code>query()</code>：相当于布尔索引</li>
+<li><code>drop()</code>：删除指定的行或列</li>
+<li><code>rename()</code>：重命名行或列索引</li>
+<li><code>reset_index()</code>：重制索引（将索引变成普通列）</li>
+<li><code>set_index()</code>：设置索引（将一个列或多个列指定为索引）</li>
+<li><code>reindex()</code>：调整行或列索引的顺序（还可以做花式索引）</li>
+</ul>
+<p>2.整合和重塑</p>
+<ul>
+<li><code>merge()</code>：实现两个DataFrame对象的内连接或外连接（适用于两张表有关联）。</li>
+<li><code>concat()</code>：将两个或多个DataFrame的数据拼接到一起（适用于多张表结构一致）。</li>
+</ul>
+<p>3.数据清洗（缺失值、重复值、异常值）</p>
+<ul>
+<li>缺失值：<ul>
+<li><code>dropna()</code>：删除空值</li>
+<li><code>fillna()</code>：填充空值 &lt;— 均值、中位数、众数</li>
+<li><code>isnull()</code> / <code>notnull()</code>：判断空值</li>
+</ul>
+</li>
+<li>重复值：<ul>
+<li><code>duplication()</code>：判断是否重复</li>
+<li><code>drop_duplication</code>：删除重复值</li>
+</ul>
+</li>
+<li>异常值：<ul>
+<li>异常值 / 极端值 / 离群值</li>
+<li><code>drop()</code>：删除</li>
+<li><code>replace()</code>：替换</li>
+</ul>
+</li>
+<li>预处理：<ul>
+<li><code>apply()</code>：将函数作用到数据上，需要指定在哪个轴上执行</li>
+<li><code>transform</code>：将（多个）函数作用到数据上</li>
+<li><code>applymap()</code>：对每个元素使用指定的函数进行映射，相当于<code>Series</code>上的<code>map()</code>方法 —-&gt; elementwise</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意：这三个方法都是高阶函数的用法，<code>apply()</code>方法接受的函数，可以是带归约性质的函数（聚合函数），也可以是没有归约性质的函数。<code>transform()</code>方法接受的函数不能是带归约功能的函数，只能是对数据做变换的函数，简单的说就是函数的执行不会减少数据的量。</p>
+</blockquote>
+<p>4.数据透视（排序、分组、聚合）</p>
+<ul>
+<li>透视表：根据A统计B（根据A列对数据进行分组，再对B列上聚合函数）</li>
+<li><code>groupby()</code>  —&gt;  <code>sum()</code> /<code>mean()</code>/ <code>max()</code> /…..</li>
+<li><code>pivot_table()</code>   —&gt;  专门生成透视表的函数</li>
+<li><code>cut()</code> —&gt;  数据离散化（分箱）</li>
+</ul>
+<p>5.数据可视化（统计图表）</p>
+<p>6.数据的洞察（发现问题给出建议）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yolukami.com/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/" data-id="ckv6kay050004tconbol6bdbf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python算法入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" class="article-date">
+  <time datetime="2021-09-12T16:00:00.000Z" itemprop="datePublished">2021-09-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">Python算法入门</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">基础排序算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>​        该算法是不断将列表中相邻的两个数中比较大的那个数往右移动，类似于冒泡，将比较大的那个数往上面“冒”</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span>(<span class="params">li</span>):</span></span><br><span class="line">    <span class="comment"># 因为排到第n-1趟后只剩下一个数且这个数必定是最大(最小数)，所以可减去最后一次遍历</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(i) - <span class="number">1</span>):</span><br><span class="line">        exchange = <span class="literal">False</span> <span class="comment"># 设置标志防止多余排序</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(li) - i -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> li[j] &gt; li[j + <span class="number">1</span>]:</span><br><span class="line">                li[j], li[j + <span class="number">1</span>] = li[j + <span class="number">1</span>], li[j]</span><br><span class="line">                exchange = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> exchange:</span><br><span class="line">                <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>​        该算法是找出列表中最小的元素，放在列表开头(已排好序)，然后将剩余的元素看成一个列表，重复进行前面的操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">select_sort</span>(<span class="params">li</span>):</span></span><br><span class="line">    <span class="comment"># 和冒泡算法一样，在最后一趟就只剩下一个最大数(最小数),所以减少一趟遍历</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(li) - <span class="number">1</span>):</span><br><span class="line">        min_ind = i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i + <span class="number">1</span>, <span class="built_in">len</span>(li)):</span><br><span class="line">            <span class="keyword">if</span> li[min_ind] &gt; li[j]:</span><br><span class="line">                min_ind = j</span><br><span class="line">        li[i], li[min_ind] = li[min_ind], li[i]</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>​        该算法类似于插扑克牌，我们斗地主的时候都习惯将手中的牌排好顺序，然后将摸到的牌也顺序插入到手中，是一个原理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_sort</span>(<span class="params">li</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(li)): <span class="comment"># i 表示摸到的牌的下标</span></span><br><span class="line">        tmp = li[i]</span><br><span class="line">        j = i - <span class="number">1</span> <span class="comment"># j表示手中已排好序的牌中的最后一张</span></span><br><span class="line">        <span class="keyword">while</span> j &gt;= <span class="number">0</span> <span class="keyword">and</span> li[j] &gt; tmp: <span class="comment"># 手中的牌比摸到的牌大，就向右移一位</span></span><br><span class="line">            li[j + <span class="number">1</span>] = li[j]</span><br><span class="line">            j -= <span class="number">1</span></span><br><span class="line">        li[j + <span class="number">1</span>] = tmp</span><br></pre></td></tr></table></figure>
+
+<p>以上3个排序的时间复杂度最坏都是O(N²)，所以也被称为排序算法中的“LowB三人组”</p>
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>该算法的思想是取一个分界点，然后将列表分为两部分，左边一部分是小于这个分界点的数，右边一部分是大于这个分界点的数，然后再将左边和右边那部分 分别当作一个列表，再重复以上操作，直到每部分只有一个元素有序；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span>(<span class="params">li, left, right</span>):</span></span><br><span class="line">    tmp = li[<span class="number">0</span>] <span class="comment"># 取列表第一个数作为分界点</span></span><br><span class="line">    <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">        <span class="comment"># 先从右边开始遍历，直到找到比分界点小的数</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right <span class="keyword">and</span> li[right] &gt; tmp:</span><br><span class="line">            right -= <span class="number">1</span></span><br><span class="line">        <span class="comment"># 找到比分界点小的数后就放到left指针指向的位置(即放到分界点的左边)</span></span><br><span class="line">        li[left] = li[right]</span><br><span class="line">        <span class="comment"># 找到一个比分界点小的数后就从左边开始遍历，直到直到找到比分界点大的数</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right <span class="keyword">and</span> li[left] &lt; tmp:</span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">        <span class="comment"># 找到比分界点小的数后就放到right指针指向的位置(即放到分界点的右边)</span></span><br><span class="line">        li[right] = li[left]</span><br><span class="line">    <span class="comment"># 最后将分界点放在left指向的位置</span></span><br><span class="line">    li[left] = tmp</span><br><span class="line">    <span class="keyword">return</span> left</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span>(<span class="params">li, left, right</span>):</span></span><br><span class="line">    mid = partition(li, left, right)</span><br><span class="line">    <span class="comment"># 调用自身先对左边进行排序， 再对右边进行排序</span></span><br><span class="line">    quick_sort(li, left, mid - <span class="number">1</span>)</span><br><span class="line">    quick_sort(li, mid + <span class="number">1</span>, right)</span><br></pre></td></tr></table></figure>
+
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>该算法采用的也是递归思想，先将列表分为两部分，从两部分的起始位置开始比较遍历，较小(大)的一个就取出来放入一个新列表中，然后重复比较后面的数，将较小(大)的数放入列表中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">li, low, mid, high</span>):</span></span><br><span class="line">    i = low</span><br><span class="line">    j = mid + <span class="number">1</span></span><br><span class="line">    ltmp = []</span><br><span class="line">    <span class="keyword">while</span> i &lt;= mid <span class="keyword">and</span> j &lt;= high:</span><br><span class="line">        <span class="keyword">if</span> li[i] &lt; li[j]:</span><br><span class="line">            ltmp.append(li[i])</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ltmp.append(li[j])</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 将比较完后剩余列表中的数全部加入到ltmp列表中</span></span><br><span class="line">    <span class="keyword">while</span> i &lt;= mid:</span><br><span class="line">        ltmp.append(li[i])</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> j &lt;= high:</span><br><span class="line">        ltmp.append(li[j])</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    li[low:high + <span class="number">1</span>] = ltmp</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span>(<span class="params">li, low, high</span>):</span></span><br><span class="line">    <span class="keyword">if</span> low &lt; high:</span><br><span class="line">        mid = (low + high) // <span class="number">2</span></span><br><span class="line">        merge_sort(li, low, mid)</span><br><span class="line">        merge_sort(li, mid + <span class="number">1</span>, high)</span><br><span class="line">        merge(li, low, mid, high)</span><br></pre></td></tr></table></figure>
+
+<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sift</span>(<span class="params">li, low, high</span>):</span></span><br><span class="line">    i = low</span><br><span class="line">    j = <span class="number">2</span> * i + <span class="number">1</span></span><br><span class="line">    tmp = li[low]</span><br><span class="line">    <span class="keyword">while</span> j &lt;= high:</span><br><span class="line">        <span class="keyword">if</span> j + <span class="number">1</span> &lt;= high <span class="keyword">and</span> li[j + <span class="number">1</span>] &gt; li[j]:</span><br><span class="line">            j = j + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> li[j] &gt; tmp:</span><br><span class="line">            li[i] = li[j]</span><br><span class="line">            i = j</span><br><span class="line">            j = <span class="number">2</span> * i + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            li[i] = tmp</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        li[i] = tmp</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heap_sort</span>(<span class="params">li</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(li)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>((n - <span class="number">2</span>) // <span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">        sift(li, i, n -<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n - <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">        li[<span class="number">0</span>], li[i] = li[i], li[<span class="number">0</span>]</span><br><span class="line">        sift(li, <span class="number">0</span>, i - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yolukami.com/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" data-id="ckv6kay050005tcong1kwg57p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Python基础学习/Python基础学习（一）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/09/13/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" class="article-date">
@@ -249,7 +400,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yolukami.com/2021/09/13/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" data-id="ckv6k7wia00027oonasmc78vm" class="article-share-link">Share</a>
+      <a data-url="http://yolukami.com/2021/09/13/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" data-id="ckv6kay060007tcon64sy9wx0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -361,158 +512,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yolukami.com/2021/09/13/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/" data-id="ckv6k7wil00047oon6lyadlho" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据分析流程" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/" class="article-date">
-  <time datetime="2021-09-12T16:00:00.000Z" itemprop="datePublished">2021-09-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/">数据分析流程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="数据分析的一般流程"><a href="#数据分析的一般流程" class="headerlink" title="数据分析的一般流程"></a>数据分析的一般流程</h3><p>1.提取数据（筛选）</p>
-<ul>
-<li>布尔索引</li>
-<li><code>query()</code>：相当于布尔索引</li>
-<li><code>drop()</code>：删除指定的行或列</li>
-<li><code>rename()</code>：重命名行或列索引</li>
-<li><code>reset_index()</code>：重制索引（将索引变成普通列）</li>
-<li><code>set_index()</code>：设置索引（将一个列或多个列指定为索引）</li>
-<li><code>reindex()</code>：调整行或列索引的顺序（还可以做花式索引）</li>
-</ul>
-<p>2.整合和重塑</p>
-<ul>
-<li><code>merge()</code>：实现两个DataFrame对象的内连接或外连接（适用于两张表有关联）。</li>
-<li><code>concat()</code>：将两个或多个DataFrame的数据拼接到一起（适用于多张表结构一致）。</li>
-</ul>
-<p>3.数据清洗（缺失值、重复值、异常值）</p>
-<ul>
-<li>缺失值：<ul>
-<li><code>dropna()</code>：删除空值</li>
-<li><code>fillna()</code>：填充空值 &lt;— 均值、中位数、众数</li>
-<li><code>isnull()</code> / <code>notnull()</code>：判断空值</li>
-</ul>
-</li>
-<li>重复值：<ul>
-<li><code>duplication()</code>：判断是否重复</li>
-<li><code>drop_duplication</code>：删除重复值</li>
-</ul>
-</li>
-<li>异常值：<ul>
-<li>异常值 / 极端值 / 离群值</li>
-<li><code>drop()</code>：删除</li>
-<li><code>replace()</code>：替换</li>
-</ul>
-</li>
-<li>预处理：<ul>
-<li><code>apply()</code>：将函数作用到数据上，需要指定在哪个轴上执行</li>
-<li><code>transform</code>：将（多个）函数作用到数据上</li>
-<li><code>applymap()</code>：对每个元素使用指定的函数进行映射，相当于<code>Series</code>上的<code>map()</code>方法 —-&gt; elementwise</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>注意：这三个方法都是高阶函数的用法，<code>apply()</code>方法接受的函数，可以是带归约性质的函数（聚合函数），也可以是没有归约性质的函数。<code>transform()</code>方法接受的函数不能是带归约功能的函数，只能是对数据做变换的函数，简单的说就是函数的执行不会减少数据的量。</p>
-</blockquote>
-<p>4.数据透视（排序、分组、聚合）</p>
-<ul>
-<li>透视表：根据A统计B（根据A列对数据进行分组，再对B列上聚合函数）</li>
-<li><code>groupby()</code>  —&gt;  <code>sum()</code> /<code>mean()</code>/ <code>max()</code> /…..</li>
-<li><code>pivot_table()</code>   —&gt;  专门生成透视表的函数</li>
-<li><code>cut()</code> —&gt;  数据离散化（分箱）</li>
-</ul>
-<p>5.数据可视化（统计图表）</p>
-<p>6.数据的洞察（发现问题给出建议）</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yolukami.com/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/" data-id="ckv6k7wim00057oonam5c4xfz" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python算法入门" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" class="article-date">
-  <time datetime="2021-09-12T16:00:00.000Z" itemprop="datePublished">2021-09-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">Python算法入门</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">基础排序算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>​        该算法是不断将列表中相邻的两个数中比较大的那个数往右移动，类似于冒泡，将比较大的那个数往上面“冒”</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bubble_sort</span>(<span class="params">li</span>):</span></span><br><span class="line">    <span class="comment"># 因为排到第n-1趟后只剩下一个数且这个数必定是最大(最小数)，所以可减去最后一次遍历</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(i) - <span class="number">1</span>):</span><br><span class="line">        exchange = <span class="literal">False</span> <span class="comment"># 设置标志防止多余排序</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(li) - i -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> li[j] &gt; li[j + <span class="number">1</span>]:</span><br><span class="line">                li[j], li[j + <span class="number">1</span>] = li[j + <span class="number">1</span>], li[j]</span><br><span class="line">                exchange = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> exchange:</span><br><span class="line">                <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>​        该算法是找出列表中最小的元素，放在列表开头(已排好序)，然后将剩余的元素看成一个列表，重复进行前面的操作</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">select_sort</span>(<span class="params">li</span>):</span></span><br><span class="line">    <span class="comment"># 和冒泡算法一样，在最后一趟就只剩下一个最大数(最小数),所以减少一趟遍历</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(li) - <span class="number">1</span>):</span><br><span class="line">        min_ind = i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i + <span class="number">1</span>, <span class="built_in">len</span>(li)):</span><br><span class="line">            <span class="keyword">if</span> li[min_ind] &gt; li[j]:</span><br><span class="line">                min_ind = j</span><br><span class="line">        li[i], li[min_ind] = li[min_ind], li[i]</span><br></pre></td></tr></table></figure>
-
-<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>​        该算法类似于插扑克牌，我们斗地主的时候都习惯将手中的牌排好顺序，然后将摸到的牌也顺序插入到手中，是一个原理</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">insert_sort</span>(<span class="params">li</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(li)): <span class="comment"># i 表示摸到的牌的下标</span></span><br><span class="line">        tmp = li[i]</span><br><span class="line">        j = i - <span class="number">1</span> <span class="comment"># j表示手中已排好序的牌中的最后一张</span></span><br><span class="line">        <span class="keyword">while</span> j &gt;= <span class="number">0</span> <span class="keyword">and</span> li[j] &gt; tmp: <span class="comment"># 手中的牌比摸到的牌大，就向右移一位</span></span><br><span class="line">            li[j + <span class="number">1</span>] = li[j]</span><br><span class="line">            j -= <span class="number">1</span></span><br><span class="line">        li[j + <span class="number">1</span>] = tmp</span><br></pre></td></tr></table></figure>
-
-<p>以上3个排序的时间复杂度最坏都是O(N²)，所以也被称为排序算法中的“LowB三人组”</p>
-<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>该算法的思想是取一个分界点，然后将列表分为两部分，左边一部分是小于这个分界点的数，右边一部分是大于这个分界点的数，然后再将左边和右边那部分 分别当作一个列表，再重复以上操作，直到每部分只有一个元素有序；</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partition</span>(<span class="params">li, left, right</span>):</span></span><br><span class="line">    tmp = li[<span class="number">0</span>] <span class="comment"># 取列表第一个数作为分界点</span></span><br><span class="line">    <span class="keyword">while</span> left &lt;= right:</span><br><span class="line">        <span class="comment"># 先从右边开始遍历，直到找到比分界点小的数</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right <span class="keyword">and</span> li[right] &gt; tmp:</span><br><span class="line">            right -= <span class="number">1</span></span><br><span class="line">        <span class="comment"># 找到比分界点小的数后就放到left指针指向的位置(即放到分界点的左边)</span></span><br><span class="line">        li[left] = li[right]</span><br><span class="line">        <span class="comment"># 找到一个比分界点小的数后就从左边开始遍历，直到直到找到比分界点大的数</span></span><br><span class="line">        <span class="keyword">while</span> left &lt;= right <span class="keyword">and</span> li[left] &lt; tmp:</span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">        <span class="comment"># 找到比分界点小的数后就放到right指针指向的位置(即放到分界点的右边)</span></span><br><span class="line">        li[right] = li[left]</span><br><span class="line">    <span class="comment"># 最后将分界点放在left指向的位置</span></span><br><span class="line">    li[left] = tmp</span><br><span class="line">    <span class="keyword">return</span> left</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">quick_sort</span>(<span class="params">li, left, right</span>):</span></span><br><span class="line">    mid = partition(li, left, right)</span><br><span class="line">    <span class="comment"># 调用自身先对左边进行排序， 再对右边进行排序</span></span><br><span class="line">    quick_sort(li, left, mid - <span class="number">1</span>)</span><br><span class="line">    quick_sort(li, mid + <span class="number">1</span>, right)</span><br></pre></td></tr></table></figure>
-
-<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>该算法采用的也是递归思想，先将列表分为两部分，从两部分的起始位置开始比较遍历，较小(大)的一个就取出来放入一个新列表中，然后重复比较后面的数，将较小(大)的数放入列表中。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span>(<span class="params">li, low, mid, high</span>):</span></span><br><span class="line">    i = low</span><br><span class="line">    j = mid + <span class="number">1</span></span><br><span class="line">    ltmp = []</span><br><span class="line">    <span class="keyword">while</span> i &lt;= mid <span class="keyword">and</span> j &lt;= high:</span><br><span class="line">        <span class="keyword">if</span> li[i] &lt; li[j]:</span><br><span class="line">            ltmp.append(li[i])</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            ltmp.append(li[j])</span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 将比较完后剩余列表中的数全部加入到ltmp列表中</span></span><br><span class="line">    <span class="keyword">while</span> i &lt;= mid:</span><br><span class="line">        ltmp.append(li[i])</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> j &lt;= high:</span><br><span class="line">        ltmp.append(li[j])</span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    li[low:high + <span class="number">1</span>] = ltmp</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span>(<span class="params">li, low, high</span>):</span></span><br><span class="line">    <span class="keyword">if</span> low &lt; high:</span><br><span class="line">        mid = (low + high) // <span class="number">2</span></span><br><span class="line">        merge_sort(li, low, mid)</span><br><span class="line">        merge_sort(li, mid + <span class="number">1</span>, high)</span><br><span class="line">        merge(li, low, mid, high)</span><br></pre></td></tr></table></figure>
-
-<h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sift</span>(<span class="params">li, low, high</span>):</span></span><br><span class="line">    i = low</span><br><span class="line">    j = <span class="number">2</span> * i + <span class="number">1</span></span><br><span class="line">    tmp = li[low]</span><br><span class="line">    <span class="keyword">while</span> j &lt;= high:</span><br><span class="line">        <span class="keyword">if</span> j + <span class="number">1</span> &lt;= high <span class="keyword">and</span> li[j + <span class="number">1</span>] &gt; li[j]:</span><br><span class="line">            j = j + <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> li[j] &gt; tmp:</span><br><span class="line">            li[i] = li[j]</span><br><span class="line">            i = j</span><br><span class="line">            j = <span class="number">2</span> * i + <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            li[i] = tmp</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        li[i] = tmp</span><br><span class="line">      </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">heap_sort</span>(<span class="params">li</span>):</span></span><br><span class="line">    n = <span class="built_in">len</span>(li)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>((n - <span class="number">2</span>) // <span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">        sift(li, i, n -<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n - <span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">        li[<span class="number">0</span>], li[i] = li[i], li[<span class="number">0</span>]</span><br><span class="line">        sift(li, <span class="number">0</span>, i - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yolukami.com/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" data-id="ckv6k7wj6000d7oon9zl0ccaz" class="article-share-link">Share</a>
+      <a data-url="http://yolukami.com/2021/09/13/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/" data-id="ckv6kay070008tconej2r71qv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -789,7 +789,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yolukami.com/2021/09/13/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" data-id="ckv6k7wj7000e7oonc9p42nnt" class="article-share-link">Share</a>
+      <a data-url="http://yolukami.com/2021/09/13/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" data-id="ckv6kay0b000gtcondsdbekd7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1228,7 +1228,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yolukami.com/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E8%AE%BA/" data-id="ckv6k7wjc000i7oonafxt58dr" class="article-share-link">Share</a>
+      <a data-url="http://yolukami.com/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E8%AE%BA/" data-id="ckv6kay0b000htcon5fwn08mi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1277,7 +1277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yolukami.com/2021/09/11/hello-world/" data-id="ckv6k7wc900007oon2cpjberr" class="article-share-link">Share</a>
+      <a data-url="http://yolukami.com/2021/09/11/hello-world/" data-id="ckv6kaxzv0000tcon04sn9h5w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1394,7 +1394,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yolukami.com/2021/07/13/markdown%E8%AF%AD%E6%B3%95/" data-id="ckv6k7wi800017ooncqk83ix4" class="article-share-link">Share</a>
+      <a data-url="http://yolukami.com/2021/07/13/markdown%E8%AF%AD%E6%B3%95/" data-id="ckv6kay000001tcon2r1q726y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1442,19 +1442,19 @@
       <ul>
         
           <li>
-            <a href="/2021/09/13/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">Python基础学习（一）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/09/13/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/">Python基础学习（三）</a>
-          </li>
-        
-          <li>
             <a href="/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/">数据分析流程</a>
           </li>
         
           <li>
             <a href="/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">基础排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/13/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">Python基础学习（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/13/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/">Python基础学习（三）</a>
           </li>
         
           <li>
