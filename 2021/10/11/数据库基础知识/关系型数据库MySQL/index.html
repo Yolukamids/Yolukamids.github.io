@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>关系型数据库MySQL | technology-column of Yolukami</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关系数据库入门关系数据库概述 数据持久化 - 将数据保存到能够长久保存数据的存储介质中，在掉电的情况下数据也不会丢失。  数据库发展史 - 网状数据库、层次数据库、关系数据库、NoSQL 数据库、NewSQL 数据库。  1970年，IBM的研究员E.F.Codd在Communication of the ACM上发表了名为A Relational Model of Data for Large">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关系型数据库MySQL">
+<meta property="og:url" content="http://yolukami.com/2021/10/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93MySQL/index.html">
+<meta property="og:site_name" content="technology-column of Yolukami">
+<meta property="og:description" content="关系数据库入门关系数据库概述 数据持久化 - 将数据保存到能够长久保存数据的存储介质中，在掉电的情况下数据也不会丢失。  数据库发展史 - 网状数据库、层次数据库、关系数据库、NoSQL 数据库、NewSQL 数据库。  1970年，IBM的研究员E.F.Codd在Communication of the ACM上发表了名为A Relational Model of Data for Large">
+<meta property="og:locale">
+<meta property="og:image" content="https://gitee.com/jackfrued/mypic/raw/master/20210826003119.png">
+<meta property="og:image" content="https://gitee.com/jackfrued/mypic/raw/master/20210826003212.png">
+<meta property="article:published_time" content="2021-10-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-11T09:00:30.499Z">
+<meta property="article:author" content="Yolukami">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/jackfrued/mypic/raw/master/20210826003119.png">
+  
+    <link rel="alternate" href="/atom.xml" title="technology-column of Yolukami" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">technology-column of Yolukami</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yolukami.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-数据库基础知识/关系型数据库MySQL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93MySQL/" class="article-date">
+  <time datetime="2021-10-10T16:00:00.000Z" itemprop="datePublished">2021-10-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MySQL数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关系型数据库MySQL
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="关系数据库入门"><a href="#关系数据库入门" class="headerlink" title="关系数据库入门"></a>关系数据库入门</h2><h3 id="关系数据库概述"><a href="#关系数据库概述" class="headerlink" title="关系数据库概述"></a>关系数据库概述</h3><ol>
+<li><p>数据持久化 - 将数据保存到能够长久保存数据的存储介质中，在掉电的情况下数据也不会丢失。</p>
+</li>
+<li><p>数据库发展史 - 网状数据库、层次数据库、关系数据库、NoSQL 数据库、NewSQL 数据库。</p>
+<blockquote>
+<p>1970年，IBM的研究员E.F.Codd在<em>Communication of the ACM</em>上发表了名为<em>A Relational Model of Data for Large Shared Data Banks</em>的论文，提出了<strong>关系模型</strong>的概念，奠定了关系模型的理论基础。后来Codd又陆续发表多篇文章，论述了范式理论和衡量关系系统的12条标准，用数学理论奠定了关系数据库的基础。</p>
+</blockquote>
+</li>
+<li><p>关系数据库特点。</p>
+<ul>
+<li><p>理论基础：<strong>关系代数</strong>。</p>
+</li>
+<li><p>具体表象：用<strong>二维表</strong>（有行和列）组织数据。</p>
+</li>
+<li><p>编程语言：<strong>结构化查询语言</strong>（SQL）。</p>
+</li>
+</ul>
+</li>
+<li><p>ER模型（实体关系模型）和概念模型图。</p>
+<p><strong>ER模型</strong>，全称为<strong>实体关系模型</strong>（Entity-Relationship Model），由美籍华裔计算机科学家陈品山先生提出，是概念数据模型的高层描述方式，如下图所示。</p>
+<img src="https://gitee.com/jackfrued/mypic/raw/master/20210826003119.png" width="75%">
+
+<ul>
+<li>实体 - 矩形框</li>
+<li>属性 - 椭圆框</li>
+<li>关系 - 菱形框</li>
+<li>重数 - 1:1（一对一） / 1:N（一对多） / M:N（多对多）</li>
+</ul>
+<p>实际项目开发中，我们可以利用数据库建模工具（如：PowerDesigner）来绘制概念数据模型（其本质就是 ER 模型），然后再设置好目标数据库系统，将概念模型转换成物理模型，最终生成创建二维表的 SQL（很多工具都可以根据我们设计的物理模型图以及设定的目标数据库来导出 SQL 或直接生成数据表）。</p>
+<p><img src="https://gitee.com/jackfrued/mypic/raw/master/20210826003212.png"></p>
+</li>
+<li><p>关系数据库产品。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.oracle.com/index.html">Oracle</a> - 目前世界上使用最为广泛的数据库管理系统，作为一个通用的数据库系统，它具有完整的数据管理功能；作为一个关系数据库，它是一个完备关系的产品；作为分布式数据库，它实现了分布式处理的功能。在 Oracle 最新的 12c 版本中，还引入了多承租方架构，使用该架构可轻松部署和管理数据库云。</li>
+<li><a target="_blank" rel="noopener" href="https://www.ibm.com/analytics/us/en/db2/">DB2</a> - IBM 公司开发的、主要运行于 Unix（包括 IBM 自家的 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/AIX">AIX</a>）、Linux、以及 Windows 服务器版等系统的关系数据库产品。DB2 历史悠久且被认为是最早使用 SQL 的数据库产品，它拥有较为强大的商业智能功能。</li>
+<li><a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/sql-server/">SQL Server</a> - 由 Microsoft 开发和推广的关系型数据库产品，最初适用于中小企业的数据管理，但是近年来它的应用范围有所扩展，部分大企业甚至是跨国公司也开始基于它来构建自己的数据管理系统。</li>
+<li><a target="_blank" rel="noopener" href="https://www.mysql.com/">MySQL</a> - MySQL 是开放源代码的，任何人都可以在 GPL（General Public License）的许可下下载并根据个性化的需要对其进行修改。MySQL 因为其速度、可靠性和适应性而备受关注。</li>
+<li><a href="">PostgreSQL</a> - 在 BSD 许可证下发行的开放源代码的关系数据库产品。</li>
+</ul>
+</li>
+</ol>
+<h3 id="MySQL简介"><a href="#MySQL简介" class="headerlink" title="MySQL简介"></a>MySQL简介</h3><p>MySQL 最早是由瑞典的 MySQL AB 公司开发的一个开放源码的关系数据库管理系统，该公司于2008年被昇阳微系统公司（Sun Microsystems）收购。在2009年，甲骨文公司（Oracle）收购昇阳微系统公司，因此 MySQL 目前也是 Oracle 旗下产品。</p>
+<p>MySQL 在过去由于性能高、成本低、可靠性好，已经成为最流行的开源数据库，因此被广泛地应用于中小型网站开发。随着 MySQL 的不断成熟，它也逐渐被应用于更多大规模网站和应用，比如维基百科、谷歌（Google）、脸书（Facebook）、淘宝网等网站都使用了 MySQL 来提供数据持久化服务。</p>
+<p>甲骨文公司收购后昇阳微系统公司，大幅调涨 MySQL 商业版的售价，且甲骨文公司不再支持另一个自由软件项目 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/OpenSolaris">OpenSolaris </a> 的发展，因此导致自由软件社区对于 Oracle 是否还会持续支持 MySQL 社区版（MySQL 的各个发行版本中唯一免费的版本）有所担忧，MySQL 的创始人麦克尔·维德纽斯以 MySQL 为基础，创建了 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/MariaDB">MariaDB</a>（以他女儿的名字命名的数据库）分支。有许多原来使用 MySQL 数据库的公司（例如：维基百科）已经陆续完成了从 MySQL 数据库到 MariaDB 数据库的迁移。</p>
+<h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><h4 id="Windows环境"><a href="#Windows环境" class="headerlink" title="Windows环境"></a>Windows环境</h4><p>（按照上课讲的内容自行补充）</p>
+<h4 id="Linux环境"><a href="#Linux环境" class="headerlink" title="Linux环境"></a>Linux环境</h4><p>下面的安装和配置都是以 CentOS 环境为例，如果需要在其他 Linux 系统下安装 MySQL，读者可以自行在网络上查找对应的安装教程。</p>
+<ol>
+<li><p>安装 MySQL。</p>
+<p>可以在 <a target="_blank" rel="noopener" href="https://www.mysql.com/">MySQL 官方网站</a>下载安装文件。首先在下载页面中选择平台和版本，然后找到对应的下载链接，直接下载包含所有安装文件的归档文件，解归档之后通过包管理工具进行安装。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.26-1.el7.x86_64.rpm-bundle.tar</span><br><span class="line">tar -xvf mysql-5.7.26-1.el7.x86_64.rpm-bundle.tar</span><br></pre></td></tr></table></figure>
+
+<p>如果系统上有 MariaDB 相关的文件，需要先移除MariaDB相关的文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list installed | grep mariadb | awk &#x27;&#123;print $1&#125;&#x27; | xargs yum erase -y</span><br></pre></td></tr></table></figure>
+
+<p>更新和安装可能用到的底层依赖库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br><span class="line">yum install -y libaio libaio-devel</span><br></pre></td></tr></table></figure>
+
+<p>接下来可以按照如下所示的顺序用 RPM（Redhat Package Manager）工具安装 MySQL。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh mysql-community-common-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-compat-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-devel-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-server-5.7.26-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<p>可以使用下面的命令查看已经安装的MySQL相关的包。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep mysql</span><br></pre></td></tr></table></figure></li>
+<li><p>配置 MySQL。</p>
+<p>MySQL 的配置文件在<code>/etc</code>目录下，名为<code>my.cnf</code>，默认的配置文件内容如下所示。如果对这个文件不理解并没有关系，什么时候用到这个配置文件什么时候再了解它就行了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/my.cnf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># For advice on how to change settings please see</span></span><br><span class="line"><span class="comment"># http://dev.mysql.com/doc/refman/5.7/en/server-configuration-defaults.html</span></span><br><span class="line"></span><br><span class="line"><span class="section">[mysqld]</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Remove leading # and set to the amount of RAM for the most important data</span></span><br><span class="line"><span class="comment"># cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.</span></span><br><span class="line"><span class="comment"># innodb_buffer_pool_size = 128M</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Remove leading # to turn on a very important data integrity option: logging</span></span><br><span class="line"><span class="comment"># changes to the binary log between backups.</span></span><br><span class="line"><span class="comment"># log_bin</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Remove leading # to set options mainly useful for reporting servers.</span></span><br><span class="line"><span class="comment"># The server defaults are faster for transactions and fast SELECTs.</span></span><br><span class="line"><span class="comment"># Adjust sizes as needed, experiment to find the optimal values.</span></span><br><span class="line"><span class="comment"># join_buffer_size = 128M</span></span><br><span class="line"><span class="comment"># sort_buffer_size = 2M</span></span><br><span class="line"><span class="comment"># read_rnd_buffer_size = 2M</span></span><br><span class="line"><span class="attr">datadir</span>=/var/lib/mysql</span><br><span class="line"><span class="attr">socket</span>=/var/lib/mysql/mysql.sock</span><br><span class="line"></span><br><span class="line"><span class="comment"># Disabling symbolic-links is recommended to prevent assorted security risks</span></span><br><span class="line"><span class="attr">symbolic-links</span>=<span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">log-error</span>=/var/log/mysqld.log</span><br><span class="line"><span class="attr">pid-file</span>=/var/run/mysqld/mysqld.pid</span><br></pre></td></tr></table></figure></li>
+<li><p>启动 MySQL 服务。</p>
+<p>可以使用下面的命令来启动 MySQL。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld start</span><br></pre></td></tr></table></figure>
+
+<p>在 CentOS 7 中，更推荐使用下面的命令来启动 MySQL。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld</span><br></pre></td></tr></table></figure>
+
+<p>启动 MySQL 成功后，可以通过下面的命令来检查网络端口使用情况，MySQL 默认使用<code>3306</code>端口。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ntlp | grep mysql</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用下面的命令查找是否有名为<code>mysqld</code>的进程。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pgrep mysqld</span><br></pre></td></tr></table></figure></li>
+<li><p>使用 MySQL 客户端工具连接服务器。</p>
+<p>命令行工具：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>说明：启动客户端时，<code>-u</code>参数用来指定用户名，MySQL默认的超级管理账号为<code>root</code>；<code>-p</code>表示要输入密码（用户口令）；如果连接的是其他主机而非本机，可以用<code>-h</code>来指定连接主机的主机名或IP地址。</p>
+</blockquote>
+<p>如果是首次安装MySQL，可以使用下面的命令来找到默认的初始密码。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /var/log/mysqld.log | grep password</span><br></pre></td></tr></table></figure>
+
+<p>上面的命令会查看MySQL的日志带有<code>password</code>的行，在显示的结果中<code>root@localhost:</code>后面的部分就是默认设置的初始密码。</p>
+<p>进入客户端工具后，可以通过下面的指令来修改超级管理员（root）的访问口令为<code>123456</code>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> validate_password_policy<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"><span class="keyword">set</span> <span class="keyword">global</span> validate_password_length<span class="operator">=</span><span class="number">6</span>;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">user</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;123456&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>说明</strong>：MySQL 较新的版本默认不允许使用弱口令作为用户口令，所以上面的代码修改了验证用户口令的策略和口令的长度。事实上我们不应该使用弱口令，因为存在用户口令被暴力破解的风险。近年来，<strong>攻击数据库窃取数据和劫持数据库勒索比特币</strong>的事件屡见不鲜，要避免这些潜在的风险，最为重要的一点是<strong>不要让数据库服务器暴露在公网上</strong>（最好的做法是将数据库置于内网，至少要做到不向公网开放数据库服务器的访问端口），另外要保管好<code>root</code>账号的口令，应用系统需要访问数据库时，通常不使用<code>root</code>账号进行访问，而是<strong>创建其他拥有适当权限的账号来访问</strong>。</p>
+</blockquote>
+<p>再次使用客户端工具连接 MySQL 服务器时，就可以使用新设置的口令了。在实际开发中，为了方便用户操作，可以选择图形化的客户端工具来连接 MySQL 服务器，包括：</p>
+<ul>
+<li>MySQL Workbench（官方工具，推荐大家使用）</li>
+<li>Navicat for MySQL（界面简单清爽，功能直观）</li>
+<li>SQLyog for MySQL（强大的MySQL数据库管理员工具）</li>
+</ul>
+</li>
+</ol>
+<h3 id="MySQL常用命令"><a href="#MySQL常用命令" class="headerlink" title="MySQL常用命令"></a>MySQL常用命令</h3><ul>
+<li><p>查看所有数据库。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> databases;</span><br></pre></td></tr></table></figure></li>
+<li><p>查看所有字符集（编码方式）。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="type">character</span> <span class="keyword">set</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>查看所有的校对规则（排序）。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">collation</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>查看所有的引擎。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> engines;</span><br></pre></td></tr></table></figure></li>
+<li><p>查看所有日志文件。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="type">binary</span> logs;</span><br></pre></td></tr></table></figure></li>
+<li><p>查看数据库下所有表。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> tables;</span><br></pre></td></tr></table></figure></li>
+<li><p>获取帮助。</p>
+<ol>
+<li><p>查看<code>show</code>命令的帮助。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">? show</span><br></pre></td></tr></table></figure></li>
+<li><p>查看有哪些帮助内容。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">? contents</span><br></pre></td></tr></table></figure></li>
+<li><p>获取函数的帮助。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">? functions</span><br></pre></td></tr></table></figure></li>
+<li><p>获取数据类型的帮助。</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">? data types</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<h3 id="SQL详解"><a href="#SQL详解" class="headerlink" title="SQL详解"></a>SQL详解</h3><p>我们通常可以将SQL分为四类，分别是 DDL（数据定义语言）、DML（数据操作语言）、DQL（数据查询语言）和 DCL（数据控制语言）。DDL 主要用于创建、删除、修改数据库中的对象，比如创建、删除和修改二维表，核心的关键字包括<code>create</code>、<code>drop</code>和<code>alter</code>；DML 主要负责插入数据、删除数据和更新数据，核心的关键词包括<code>insert</code>、<code>delete</code>和<code>update</code>；DQL 负责查询，最重要的一个关键词是<code>select</code>；DCL通常用于授予权限和召回权限，核心关键词是<code>grant</code>和<code>revoke</code>。</p>
+<blockquote>
+<p><strong>说明</strong>：SQL 是不区分大小写的语言，为了书写和识别方便，下面的 SQL 都使用了小写字母来书写。</p>
+</blockquote>
+<h4 id="DDL（数据定义语言）"><a href="#DDL（数据定义语言）" class="headerlink" title="DDL（数据定义语言）"></a>DDL（数据定义语言）</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 如果存在名为school的数据库就删除它</span></span><br><span class="line"><span class="keyword">drop</span> database if <span class="keyword">exists</span> `school`;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建名为school的数据库并设置默认的字符集和排序方式</span></span><br><span class="line"><span class="keyword">create</span> database `school` <span class="keyword">default</span> <span class="type">character</span> <span class="keyword">set</span> utf8mb4;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 切换到school数据库上下文环境</span></span><br><span class="line">use `school`;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建学院表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> `tb_college`</span><br><span class="line">(</span><br><span class="line">`col_id` <span class="type">int</span> unsigned auto_increment comment <span class="string">&#x27;编号&#x27;</span>,</span><br><span class="line">`col_name` <span class="type">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;名称&#x27;</span>,</span><br><span class="line">`col_intro` <span class="type">varchar</span>(<span class="number">5000</span>) <span class="keyword">default</span> <span class="string">&#x27;&#x27;</span> comment <span class="string">&#x27;介绍&#x27;</span>,</span><br><span class="line"><span class="keyword">primary</span> key (`col_id`)</span><br><span class="line">) engine<span class="operator">=</span>innodb comment <span class="string">&#x27;学院表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建学生表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> `tb_student`</span><br><span class="line">(</span><br><span class="line">`stu_id` <span class="type">int</span> unsigned <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;学号&#x27;</span>,</span><br><span class="line">`stu_name` <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;姓名&#x27;</span>,</span><br><span class="line">`stu_sex` <span class="type">boolean</span> <span class="keyword">default</span> <span class="number">1</span> comment <span class="string">&#x27;性别&#x27;</span>,</span><br><span class="line">`stu_birth` <span class="type">date</span> <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;出生日期&#x27;</span>,</span><br><span class="line">`stu_addr` <span class="type">varchar</span>(<span class="number">255</span>) <span class="keyword">default</span> <span class="string">&#x27;&#x27;</span> comment <span class="string">&#x27;籍贯&#x27;</span>,</span><br><span class="line">`col_id` <span class="type">int</span> unsigned <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;所属学院&#x27;</span>,</span><br><span class="line"><span class="keyword">primary</span> key (`stu_id`),</span><br><span class="line"><span class="keyword">foreign</span> key (`col_id`) <span class="keyword">references</span> `tb_college` (`col_id`)</span><br><span class="line">) engine<span class="operator">=</span>innodb comment <span class="string">&#x27;学生表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建教师表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> `tb_teacher`</span><br><span class="line">(</span><br><span class="line">`tea_id` <span class="type">int</span> unsigned <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;工号&#x27;</span>,</span><br><span class="line">`tea_name` <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;姓名&#x27;</span>,</span><br><span class="line">`tea_title` <span class="type">varchar</span>(<span class="number">10</span>) <span class="keyword">default</span> <span class="string">&#x27;助教&#x27;</span> comment <span class="string">&#x27;职称&#x27;</span>,</span><br><span class="line">`col_id` <span class="type">int</span> unsigned <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;所属学院&#x27;</span>,</span><br><span class="line"><span class="keyword">primary</span> key (`tea_id`),</span><br><span class="line"><span class="keyword">foreign</span> key (`col_id`) <span class="keyword">references</span> `tb_college` (`col_id`)</span><br><span class="line">) engine<span class="operator">=</span>innodb comment <span class="string">&#x27;老师表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建课程表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> `tb_course`</span><br><span class="line">(</span><br><span class="line">`cou_id` <span class="type">int</span> unsigned <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;编号&#x27;</span>,</span><br><span class="line">`cou_name` <span class="type">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;名称&#x27;</span>,</span><br><span class="line">`cou_credit` <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;学分&#x27;</span>,</span><br><span class="line">`tea_id` <span class="type">int</span> unsigned <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;授课老师&#x27;</span>,</span><br><span class="line"><span class="keyword">primary</span> key (`cou_id`),</span><br><span class="line"><span class="keyword">foreign</span> key (`tea_id`) <span class="keyword">references</span> `tb_teacher` (`tea_id`)</span><br><span class="line">) engine<span class="operator">=</span>innodb comment <span class="string">&#x27;课程表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建选课记录表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> `tb_record`</span><br><span class="line">(</span><br><span class="line">`rec_id` <span class="type">bigint</span> unsigned auto_increment comment <span class="string">&#x27;选课记录号&#x27;</span>,</span><br><span class="line">`sid` <span class="type">int</span> unsigned <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;学号&#x27;</span>,</span><br><span class="line">`cid` <span class="type">int</span> unsigned <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;课程编号&#x27;</span>,</span><br><span class="line">`sel_date` <span class="type">date</span> <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;选课日期&#x27;</span>,</span><br><span class="line">`score` <span class="type">decimal</span>(<span class="number">4</span>,<span class="number">1</span>) comment <span class="string">&#x27;考试成绩&#x27;</span>,</span><br><span class="line"><span class="keyword">primary</span> key (`rec_id`),</span><br><span class="line"><span class="keyword">foreign</span> key (`sid`) <span class="keyword">references</span> `tb_student` (`stu_id`),</span><br><span class="line"><span class="keyword">foreign</span> key (`cid`) <span class="keyword">references</span> `tb_course` (`cou_id`),</span><br><span class="line"><span class="keyword">unique</span> (`sid`, `cid`)</span><br><span class="line">) engine<span class="operator">=</span>innodb comment <span class="string">&#x27;选课记录表&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>上面的DDL有几个地方需要强调一下：</p>
+<ul>
+<li><p>创建数据库时，我们通过<code>default charset utf8</code>指定了数据库默认使用的字符集，我们推荐使用该字符集，因为utf8能够支持国际化编码。如果将来数据库中用到的字符可能包括类似于Emoji这样的图片字符，也可以将默认字符集设定为utf8mb4（最大4字节的utf-8编码）。查看MySQL支持的字符集可以执行下面的语句。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="type">character</span> <span class="keyword">set</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">+----------+---------------------------------+---------------------+--------+</span><br><span class="line">| Charset  | Description                     | Default collation   | Maxlen |</span><br><span class="line">+----------+---------------------------------+---------------------+--------+</span><br><span class="line">| big5     | Big5 Traditional Chinese        | big5_chinese_ci     |      2 |</span><br><span class="line">| dec8     | DEC West European               | dec8_swedish_ci     |      1 |</span><br><span class="line">| cp850    | DOS West European               | cp850_general_ci    |      1 |</span><br><span class="line">| hp8      | HP West European                | hp8_english_ci      |      1 |</span><br><span class="line">| koi8r    | KOI8-R Relcom Russian           | koi8r_general_ci    |      1 |</span><br><span class="line">| latin1   | cp1252 West European            | latin1_swedish_ci   |      1 |</span><br><span class="line">| latin2   | ISO 8859-2 Central European     | latin2_general_ci   |      1 |</span><br><span class="line">| swe7     | 7bit Swedish                    | swe7_swedish_ci     |      1 |</span><br><span class="line">| ascii    | US ASCII                        | ascii_general_ci    |      1 |</span><br><span class="line">| ujis     | EUC-JP Japanese                 | ujis_japanese_ci    |      3 |</span><br><span class="line">| sjis     | Shift-JIS Japanese              | sjis_japanese_ci    |      2 |</span><br><span class="line">| hebrew   | ISO 8859-8 Hebrew               | hebrew_general_ci   |      1 |</span><br><span class="line">| tis620   | TIS620 Thai                     | tis620_thai_ci      |      1 |</span><br><span class="line">| euckr    | EUC-KR Korean                   | euckr_korean_ci     |      2 |</span><br><span class="line">| koi8u    | KOI8-U Ukrainian                | koi8u_general_ci    |      1 |</span><br><span class="line">| gb2312   | GB2312 Simplified Chinese       | gb2312_chinese_ci   |      2 |</span><br><span class="line">| greek    | ISO 8859-7 Greek                | greek_general_ci    |      1 |</span><br><span class="line">| cp1250   | Windows Central European        | cp1250_general_ci   |      1 |</span><br><span class="line">| gbk      | GBK Simplified Chinese          | gbk_chinese_ci      |      2 |</span><br><span class="line">| latin5   | ISO 8859-9 Turkish              | latin5_turkish_ci   |      1 |</span><br><span class="line">| armscii8 | ARMSCII-8 Armenian              | armscii8_general_ci |      1 |</span><br><span class="line">| utf8     | UTF-8 Unicode                   | utf8_general_ci     |      3 |</span><br><span class="line">| ucs2     | UCS-2 Unicode                   | ucs2_general_ci     |      2 |</span><br><span class="line">| cp866    | DOS Russian                     | cp866_general_ci    |      1 |</span><br><span class="line">| keybcs2  | DOS Kamenicky Czech-Slovak      | keybcs2_general_ci  |      1 |</span><br><span class="line">| macce    | Mac Central European            | macce_general_ci    |      1 |</span><br><span class="line">| macroman | Mac West European               | macroman_general_ci |      1 |</span><br><span class="line">| cp852    | DOS Central European            | cp852_general_ci    |      1 |</span><br><span class="line">| latin7   | ISO 8859-13 Baltic              | latin7_general_ci   |      1 |</span><br><span class="line">| utf8mb4  | UTF-8 Unicode                   | utf8mb4_general_ci  |      4 |</span><br><span class="line">| cp1251   | Windows Cyrillic                | cp1251_general_ci   |      1 |</span><br><span class="line">| utf16    | UTF-16 Unicode                  | utf16_general_ci    |      4 |</span><br><span class="line">| utf16le  | UTF-16LE Unicode                | utf16le_general_ci  |      4 |</span><br><span class="line">| cp1256   | Windows Arabic                  | cp1256_general_ci   |      1 |</span><br><span class="line">| cp1257   | Windows Baltic                  | cp1257_general_ci   |      1 |</span><br><span class="line">| utf32    | UTF-32 Unicode                  | utf32_general_ci    |      4 |</span><br><span class="line">| binary   | Binary pseudo charset           | binary              |      1 |</span><br><span class="line">| geostd8  | GEOSTD8 Georgian                | geostd8_general_ci  |      1 |</span><br><span class="line">| cp932    | SJIS for Windows Japanese       | cp932_japanese_ci   |      2 |</span><br><span class="line">| eucjpms  | UJIS for Windows Japanese       | eucjpms_japanese_ci |      3 |</span><br><span class="line">| gb18030  | China National Standard GB18030 | gb18030_chinese_ci  |      4 |</span><br><span class="line">+----------+---------------------------------+---------------------+--------+</span><br><span class="line">41 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>如果要设置MySQL服务启动时默认使用的字符集，可以修改MySQL的配置并添加以下内容。</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[mysqld]</span></span><br><span class="line"><span class="attr">character-set-server</span>=utf8</span><br></pre></td></tr></table></figure></li>
+<li><p>在创建表的时候，可以自行选择底层的存储引擎。MySQL 支持多种存储引擎，可以通过<code>show engines</code>命令进行查看。MySQL 5.5以后的版本默认使用的存储引擎是 InnoDB，它是我们推荐大家使用的存储引擎（因为更适合当下互联网应用对高并发、性能以及事务支持等方面的需求），为了 SQL 语句的向下兼容性，我们可以在建表语句结束处右圆括号的后面通过<code>engine=innodb</code>来指定使用 InnoDB 存储引擎。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> engines\G</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">*************************** 1. row ***************************</span><br><span class="line">      Engine: InnoDB</span><br><span class="line">     Support: DEFAULT</span><br><span class="line">     Comment: Supports transactions, row-level locking, and foreign keys</span><br><span class="line">Transactions: YES</span><br><span class="line">          XA: YES</span><br><span class="line">  Savepoints: YES</span><br><span class="line">*************************** 2. row ***************************</span><br><span class="line">      Engine: MRG_MYISAM</span><br><span class="line">     Support: YES</span><br><span class="line">     Comment: Collection of identical MyISAM tables</span><br><span class="line">Transactions: NO</span><br><span class="line">          XA: NO</span><br><span class="line">  Savepoints: NO</span><br><span class="line">*************************** 3. row ***************************</span><br><span class="line">      Engine: MEMORY</span><br><span class="line">     Support: YES</span><br><span class="line">     Comment: Hash based, stored in memory, useful for temporary tables</span><br><span class="line">Transactions: NO</span><br><span class="line">          XA: NO</span><br><span class="line">  Savepoints: NO</span><br><span class="line">*************************** 4. row ***************************</span><br><span class="line">      Engine: BLACKHOLE</span><br><span class="line">     Support: YES</span><br><span class="line">     Comment: /dev/null storage engine (anything you write to it disappears)</span><br><span class="line">Transactions: NO</span><br><span class="line">          XA: NO</span><br><span class="line">  Savepoints: NO</span><br><span class="line">*************************** 5. row ***************************</span><br><span class="line">      Engine: MyISAM</span><br><span class="line">     Support: YES</span><br><span class="line">     Comment: MyISAM storage engine</span><br><span class="line">Transactions: NO</span><br><span class="line">          XA: NO</span><br><span class="line">  Savepoints: NO</span><br><span class="line">*************************** 6. row ***************************</span><br><span class="line">      Engine: CSV</span><br><span class="line">     Support: YES</span><br><span class="line">     Comment: CSV storage engine</span><br><span class="line">Transactions: NO</span><br><span class="line">          XA: NO</span><br><span class="line">  Savepoints: NO</span><br><span class="line">*************************** 7. row ***************************</span><br><span class="line">      Engine: ARCHIVE</span><br><span class="line">     Support: YES</span><br><span class="line">     Comment: Archive storage engine</span><br><span class="line">Transactions: NO</span><br><span class="line">          XA: NO</span><br><span class="line">  Savepoints: NO</span><br><span class="line">*************************** 8. row ***************************</span><br><span class="line">      Engine: PERFORMANCE_SCHEMA</span><br><span class="line">     Support: YES</span><br><span class="line">     Comment: Performance Schema</span><br><span class="line">Transactions: NO</span><br><span class="line">          XA: NO</span><br><span class="line">  Savepoints: NO</span><br><span class="line">*************************** 9. row ***************************</span><br><span class="line">      Engine: FEDERATED</span><br><span class="line">     Support: NO</span><br><span class="line">     Comment: Federated MySQL storage engine</span><br><span class="line">Transactions: NULL</span><br><span class="line">          XA: NULL</span><br><span class="line">  Savepoints: NULL</span><br><span class="line">9 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>下面的表格对MySQL几种常用的数据引擎进行了简单的对比。</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>InnoDB</th>
+<th>MRG_MYISAM</th>
+<th>MEMORY</th>
+<th>MyISAM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>存储限制</td>
+<td>有</td>
+<td>没有</td>
+<td>有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>事务</td>
+<td>支持</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>锁机制</td>
+<td>行锁</td>
+<td>表锁</td>
+<td>表锁</td>
+<td>表锁</td>
+</tr>
+<tr>
+<td>B树索引</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>哈希索引</td>
+<td></td>
+<td></td>
+<td>支持</td>
+<td></td>
+</tr>
+<tr>
+<td>全文检索</td>
+<td>支持（5.6+）</td>
+<td></td>
+<td></td>
+<td>支持</td>
+</tr>
+<tr>
+<td>集群索引</td>
+<td>支持</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>数据缓存</td>
+<td>支持</td>
+<td></td>
+<td>支持</td>
+<td></td>
+</tr>
+<tr>
+<td>索引缓存</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>数据可压缩</td>
+<td></td>
+<td></td>
+<td></td>
+<td>支持</td>
+</tr>
+<tr>
+<td>内存使用</td>
+<td>高</td>
+<td>低</td>
+<td>中</td>
+<td>低</td>
+</tr>
+<tr>
+<td>存储空间使用</td>
+<td>高</td>
+<td>低</td>
+<td></td>
+<td>低</td>
+</tr>
+<tr>
+<td>批量插入性能</td>
+<td>低</td>
+<td>高</td>
+<td>高</td>
+<td>高</td>
+</tr>
+<tr>
+<td>是否支持外键</td>
+<td>支持</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>通过上面的比较我们可以了解到，InnoDB 是唯一能够支持外键、事务以及行锁的存储引擎，所以我们之前说它更适合互联网应用，而且在较新版本的 MySQL 中，它也是默认使用的存储引擎。</p>
+</li>
+<li><p>在定义表结构为每个字段选择数据类型时，如果不清楚哪个数据类型更合适，可以通过MySQL的帮助系统来了解每种数据类型的特性、数据的长度和精度等相关信息。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">? data types</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">You asked for help about help category: &quot;Data Types&quot;</span><br><span class="line">For more information, type &#x27;help &lt;item&gt;&#x27;, where &lt;item&gt; is one of the following</span><br><span class="line">topics:</span><br><span class="line">   AUTO_INCREMENT</span><br><span class="line">   BIGINT</span><br><span class="line">   BINARY</span><br><span class="line">   BIT</span><br><span class="line">   BLOB</span><br><span class="line">   BLOB DATA TYPE</span><br><span class="line">   BOOLEAN</span><br><span class="line">   CHAR</span><br><span class="line">   CHAR BYTE</span><br><span class="line">   DATE</span><br><span class="line">   DATETIME</span><br><span class="line">   DEC</span><br><span class="line">   DECIMAL</span><br><span class="line">   DOUBLE</span><br><span class="line">   DOUBLE PRECISION</span><br><span class="line">   ENUM</span><br><span class="line">   FLOAT</span><br><span class="line">   INT</span><br><span class="line">   INTEGER</span><br><span class="line">   LONGBLOB</span><br><span class="line">   LONGTEXT</span><br><span class="line">   MEDIUMBLOB</span><br><span class="line">   MEDIUMINT</span><br><span class="line">   MEDIUMTEXT</span><br><span class="line">   SET DATA TYPE</span><br><span class="line">   SMALLINT</span><br><span class="line">   TEXT</span><br><span class="line">   TIME</span><br><span class="line">   TIMESTAMP</span><br><span class="line">   TINYBLOB</span><br><span class="line">   TINYINT</span><br><span class="line">   TINYTEXT</span><br><span class="line">   VARBINARY</span><br><span class="line">   VARCHAR</span><br><span class="line">   YEAR DATA TYPE</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">? <span class="type">varchar</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">Name: &#x27;VARCHAR&#x27;</span><br><span class="line">Description:</span><br><span class="line">[NATIONAL] VARCHAR(M) [CHARACTER SET charset_name] [COLLATE</span><br><span class="line">collation_name]</span><br><span class="line"></span><br><span class="line">A variable-length string. M represents the maximum column length in</span><br><span class="line">characters. The range of M is 0 to 65,535. The effective maximum length</span><br><span class="line">of a VARCHAR is subject to the maximum row size (65,535 bytes, which is</span><br><span class="line">shared among all columns) and the character set used. For example, utf8</span><br><span class="line">characters can require up to three bytes per character, so a VARCHAR</span><br><span class="line">column that uses the utf8 character set can be declared to be a maximum</span><br><span class="line">of 21,844 characters. See</span><br><span class="line">http://dev.mysql.com/doc/refman/5.7/en/column-count-limit.html.</span><br><span class="line"></span><br><span class="line">MySQL stores VARCHAR values as a 1-byte or 2-byte length prefix plus</span><br><span class="line">data. The length prefix indicates the number of bytes in the value. A</span><br><span class="line">VARCHAR column uses one length byte if values require no more than 255</span><br><span class="line">bytes, two length bytes if values may require more than 255 bytes.</span><br><span class="line"></span><br><span class="line">*Note*:</span><br><span class="line"></span><br><span class="line">MySQL follows the standard SQL specification, and does not remove</span><br><span class="line">trailing spaces from VARCHAR values.</span><br><span class="line"></span><br><span class="line">VARCHAR is shorthand for CHARACTER VARYING. NATIONAL VARCHAR is the</span><br><span class="line">standard SQL way to define that a VARCHAR column should use some</span><br><span class="line">predefined character set. MySQL uses utf8 as this predefined character</span><br><span class="line">set. http://dev.mysql.com/doc/refman/5.7/en/charset-national.html.</span><br><span class="line">NVARCHAR is shorthand for NATIONAL VARCHAR.</span><br><span class="line"></span><br><span class="line">URL: http://dev.mysql.com/doc/refman/5.7/en/string-type-overview.html</span><br></pre></td></tr></table></figure>
+
+<p>在数据类型的选择上，保存字符串数据通常都使用<code>VARCHAR</code>和<code>CHAR</code>两种类型，前者通常称为变长字符串，而后者通常称为定长字符串；对于 InnoDB 存储引擎，行存储格式没有区分固定长度和可变长度列，因此<code>VARCHAR</code>类型和<code>CHAR</code>类型没有本质区别，后者不一定比前者性能更好。如果要保存的很大字符串，可以使用<code>TEXT</code>类型；如果要保存很大的字节串，可以使用<code>BLOB</code>（二进制大对象）类型。在 MySQL 中，<code>TEXT</code>和<code>BLOB</code>又分别包括<code>TEXT</code>、<code>MEDIUMTEXT</code>、<code>LONGTEXT</code>和<code>BLOB</code>、<code>MEDIUMBLOB</code>、<code>LONGBLOB</code>三种不同的类型，它们主要的区别在于存储数据的最大大小不同。保存浮点数可以用<code>FLOAT</code>或<code>DOUBLE</code>类型，<code>FLOAT</code>已经不推荐使用了，而且在 MySQL 后续的版本中可能会被移除掉。而保存定点数应该使用<code>DECIMAL</code>类型。如果要保存时间日期，<code>DATETIME</code>类型优于<code>TIMESTAMP</code>类型，因为前者能表示的时间日期范围更大。</p>
+</li>
+</ul>
+<h4 id="DML（数据操作语言）"><a href="#DML（数据操作语言）" class="headerlink" title="DML（数据操作语言）"></a>DML（数据操作语言）</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">use school;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 插入学院数据</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> `tb_college` </span><br><span class="line">    (`col_name`, `col_intro`) </span><br><span class="line"><span class="keyword">values</span> </span><br><span class="line">    (<span class="string">&#x27;计算机学院&#x27;</span>, <span class="string">&#x27;计算机学院1958年设立计算机专业，1981年建立计算机科学系，1998年设立计算机学院，2005年5月，为了进一步整合教学和科研资源，学校决定，计算机学院和软件学院行政班子合并统一运作、实行教学和学生管理独立运行的模式。 学院下设三个系：计算机科学与技术系、物联网工程系、计算金融系；两个研究所：图象图形研究所、网络空间安全研究院（2015年成立）；三个教学实验中心：计算机基础教学实验中心、IBM技术中心和计算机专业实验中心。&#x27;</span>),</span><br><span class="line">    (<span class="string">&#x27;外国语学院&#x27;</span>, <span class="string">&#x27;外国语学院设有7个教学单位，6个文理兼收的本科专业；拥有1个一级学科博士授予点，3个二级学科博士授予点，5个一级学科硕士学位授权点，5个二级学科硕士学位授权点，5个硕士专业授权领域，同时还有2个硕士专业学位（MTI）专业；有教职员工210余人，其中教授、副教授80余人，教师中获得中国国内外名校博士学位和正在职攻读博士学位的教师比例占专任教师的60%以上。&#x27;</span>),</span><br><span class="line">    (<span class="string">&#x27;经济管理学院&#x27;</span>, <span class="string">&#x27;经济学院前身是创办于1905年的经济科；已故经济学家彭迪先、张与九、蒋学模、胡寄窗、陶大镛、胡代光，以及当代学者刘诗白等曾先后在此任教或学习。&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 插入学生数据</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> `tb_student` </span><br><span class="line">    (`stu_id`, `stu_name`, `stu_sex`, `stu_birth`, `stu_addr`, `col_id`) </span><br><span class="line"><span class="keyword">values</span></span><br><span class="line">    (<span class="number">1001</span>, <span class="string">&#x27;杨过&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;1990-3-4&#x27;</span>, <span class="string">&#x27;湖南长沙&#x27;</span>, <span class="number">1</span>),</span><br><span class="line">    (<span class="number">1002</span>, <span class="string">&#x27;任我行&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;1992-2-2&#x27;</span>, <span class="string">&#x27;湖南长沙&#x27;</span>, <span class="number">1</span>),</span><br><span class="line">    (<span class="number">1033</span>, <span class="string">&#x27;王语嫣&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;1989-12-3&#x27;</span>, <span class="string">&#x27;四川成都&#x27;</span>, <span class="number">1</span>),</span><br><span class="line">    (<span class="number">1572</span>, <span class="string">&#x27;岳不群&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;1993-7-19&#x27;</span>, <span class="string">&#x27;陕西咸阳&#x27;</span>, <span class="number">1</span>),</span><br><span class="line">    (<span class="number">1378</span>, <span class="string">&#x27;纪嫣然&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;1995-8-12&#x27;</span>, <span class="string">&#x27;四川绵阳&#x27;</span>, <span class="number">1</span>),</span><br><span class="line">    (<span class="number">1954</span>, <span class="string">&#x27;林平之&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;1994-9-20&#x27;</span>, <span class="string">&#x27;福建莆田&#x27;</span>, <span class="number">1</span>),</span><br><span class="line">    (<span class="number">2035</span>, <span class="string">&#x27;东方不败&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;1988-6-30&#x27;</span>, <span class="keyword">null</span>, <span class="number">2</span>),</span><br><span class="line">    (<span class="number">3011</span>, <span class="string">&#x27;林震南&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;1985-12-12&#x27;</span>, <span class="string">&#x27;福建莆田&#x27;</span>, <span class="number">3</span>),</span><br><span class="line">    (<span class="number">3755</span>, <span class="string">&#x27;项少龙&#x27;</span>, <span class="number">1</span>, <span class="string">&#x27;1993-1-25&#x27;</span>, <span class="keyword">null</span>, <span class="number">3</span>),</span><br><span class="line">    (<span class="number">3923</span>, <span class="string">&#x27;杨不悔&#x27;</span>, <span class="number">0</span>, <span class="string">&#x27;1985-4-17&#x27;</span>, <span class="string">&#x27;四川成都&#x27;</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 插入老师数据</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> `tb_teacher` </span><br><span class="line">    (`tea_id`, `tea_name`, `tea_title`, `col_id`) </span><br><span class="line"><span class="keyword">values</span> </span><br><span class="line">    (<span class="number">1122</span>, <span class="string">&#x27;张三丰&#x27;</span>, <span class="string">&#x27;教授&#x27;</span>, <span class="number">1</span>),</span><br><span class="line">    (<span class="number">1133</span>, <span class="string">&#x27;宋远桥&#x27;</span>, <span class="string">&#x27;副教授&#x27;</span>, <span class="number">1</span>),</span><br><span class="line">    (<span class="number">1144</span>, <span class="string">&#x27;杨逍&#x27;</span>, <span class="string">&#x27;副教授&#x27;</span>, <span class="number">1</span>),</span><br><span class="line">    (<span class="number">2255</span>, <span class="string">&#x27;范遥&#x27;</span>, <span class="string">&#x27;副教授&#x27;</span>, <span class="number">2</span>),</span><br><span class="line">    (<span class="number">3366</span>, <span class="string">&#x27;韦一笑&#x27;</span>, <span class="keyword">default</span>, <span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 插入课程数据</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> `tb_course` </span><br><span class="line">    (`cou_id`, `cou_name`, `cou_credit`, `tea_id`) </span><br><span class="line"><span class="keyword">values</span> </span><br><span class="line">    (<span class="number">1111</span>, <span class="string">&#x27;Python程序设计&#x27;</span>, <span class="number">3</span>, <span class="number">1122</span>),</span><br><span class="line">    (<span class="number">2222</span>, <span class="string">&#x27;Web前端开发&#x27;</span>, <span class="number">2</span>, <span class="number">1122</span>),</span><br><span class="line">    (<span class="number">3333</span>, <span class="string">&#x27;操作系统&#x27;</span>, <span class="number">4</span>, <span class="number">1122</span>),</span><br><span class="line">    (<span class="number">4444</span>, <span class="string">&#x27;计算机网络&#x27;</span>, <span class="number">2</span>, <span class="number">1133</span>),</span><br><span class="line">    (<span class="number">5555</span>, <span class="string">&#x27;编译原理&#x27;</span>, <span class="number">4</span>, <span class="number">1144</span>),</span><br><span class="line">    (<span class="number">6666</span>, <span class="string">&#x27;算法和数据结构&#x27;</span>, <span class="number">3</span>, <span class="number">1144</span>),</span><br><span class="line">    (<span class="number">7777</span>, <span class="string">&#x27;经贸法语&#x27;</span>, <span class="number">3</span>, <span class="number">2255</span>),</span><br><span class="line">    (<span class="number">8888</span>, <span class="string">&#x27;成本会计&#x27;</span>, <span class="number">2</span>, <span class="number">3366</span>),</span><br><span class="line">    (<span class="number">9999</span>, <span class="string">&#x27;审计学&#x27;</span>, <span class="number">3</span>, <span class="number">3366</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 插入选课数据</span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> `tb_record` </span><br><span class="line">    (`sid`, `cid`, `sel_date`, `score`) </span><br><span class="line"><span class="keyword">values</span> </span><br><span class="line">    (<span class="number">1001</span>, <span class="number">1111</span>, <span class="string">&#x27;2017-09-01&#x27;</span>, <span class="number">95</span>),</span><br><span class="line">    (<span class="number">1001</span>, <span class="number">2222</span>, <span class="string">&#x27;2017-09-01&#x27;</span>, <span class="number">87.5</span>),</span><br><span class="line">    (<span class="number">1001</span>, <span class="number">3333</span>, <span class="string">&#x27;2017-09-01&#x27;</span>, <span class="number">100</span>),</span><br><span class="line">    (<span class="number">1001</span>, <span class="number">4444</span>, <span class="string">&#x27;2018-09-03&#x27;</span>, <span class="keyword">null</span>),</span><br><span class="line">    (<span class="number">1001</span>, <span class="number">6666</span>, <span class="string">&#x27;2017-09-02&#x27;</span>, <span class="number">100</span>),</span><br><span class="line">    (<span class="number">1002</span>, <span class="number">1111</span>, <span class="string">&#x27;2017-09-03&#x27;</span>, <span class="number">65</span>),</span><br><span class="line">    (<span class="number">1002</span>, <span class="number">5555</span>, <span class="string">&#x27;2017-09-01&#x27;</span>, <span class="number">42</span>),</span><br><span class="line">    (<span class="number">1033</span>, <span class="number">1111</span>, <span class="string">&#x27;2017-09-03&#x27;</span>, <span class="number">92.5</span>),</span><br><span class="line">    (<span class="number">1033</span>, <span class="number">4444</span>, <span class="string">&#x27;2017-09-01&#x27;</span>, <span class="number">78</span>),</span><br><span class="line">    (<span class="number">1033</span>, <span class="number">5555</span>, <span class="string">&#x27;2017-09-01&#x27;</span>, <span class="number">82.5</span>),</span><br><span class="line">    (<span class="number">1572</span>, <span class="number">1111</span>, <span class="string">&#x27;2017-09-02&#x27;</span>, <span class="number">78</span>),</span><br><span class="line">    (<span class="number">1378</span>, <span class="number">1111</span>, <span class="string">&#x27;2017-09-05&#x27;</span>, <span class="number">82</span>),</span><br><span class="line">    (<span class="number">1378</span>, <span class="number">7777</span>, <span class="string">&#x27;2017-09-02&#x27;</span>, <span class="number">65.5</span>),</span><br><span class="line">    (<span class="number">2035</span>, <span class="number">7777</span>, <span class="string">&#x27;2018-09-03&#x27;</span>, <span class="number">88</span>),</span><br><span class="line">    (<span class="number">2035</span>, <span class="number">9999</span>, <span class="string">&#x27;2019-09-02&#x27;</span>, <span class="keyword">null</span>),</span><br><span class="line">    (<span class="number">3755</span>, <span class="number">1111</span>, <span class="string">&#x27;2019-09-02&#x27;</span>, <span class="keyword">null</span>),</span><br><span class="line">    (<span class="number">3755</span>, <span class="number">8888</span>, <span class="string">&#x27;2019-09-02&#x27;</span>, <span class="keyword">null</span>),</span><br><span class="line">    (<span class="number">3755</span>, <span class="number">9999</span>, <span class="string">&#x27;2017-09-01&#x27;</span>, <span class="number">92</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="DQL（数据查询语言）"><a href="#DQL（数据查询语言）" class="headerlink" title="DQL（数据查询语言）"></a>DQL（数据查询语言）</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查询所有学生的所有信息</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb_student;</span><br><span class="line"><span class="keyword">select</span> stu_id, stu_name, stu_sex, stu_birth, stu_addr, col_id <span class="keyword">from</span> tb_student;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询所有课程名称及学分(投影和别名)</span></span><br><span class="line"><span class="keyword">select</span> cou_name <span class="keyword">as</span> 课程名称, cou_credit <span class="keyword">as</span> 学分 <span class="keyword">from</span> tb_course;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询所有女学生的姓名和出生日期(筛选)</span></span><br><span class="line"><span class="keyword">select</span> stu_name, stu_birth <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_sex<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询所有80后学生的姓名、性别和出生日期(筛选)</span></span><br><span class="line"><span class="keyword">select</span> stu_name, stu_sex, stu_birth <span class="keyword">from</span> tb_student </span><br><span class="line"><span class="keyword">where</span> stu_birth<span class="operator">&gt;=</span><span class="string">&#x27;1980-1-1&#x27;</span> <span class="keyword">and</span> stu_birth<span class="operator">&lt;=</span><span class="string">&#x27;1989-12-31&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> stu_name, stu_sex, stu_birth <span class="keyword">from</span> tb_student </span><br><span class="line"><span class="keyword">where</span> stu_birth <span class="keyword">between</span> <span class="string">&#x27;1980-1-1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1989-12-31&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 补充1：在查询时可以对列的值进行处理</span></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">	stu_name <span class="keyword">as</span> 姓名, </span><br><span class="line">    <span class="keyword">case</span> stu_sex <span class="keyword">when</span> <span class="number">1</span> <span class="keyword">then</span> <span class="string">&#x27;男&#x27;</span> <span class="keyword">else</span> <span class="string">&#x27;女&#x27;</span> <span class="keyword">end</span> <span class="keyword">as</span> 性别, </span><br><span class="line">    stu_birth <span class="keyword">as</span> 生日</span><br><span class="line"><span class="keyword">from</span> tb_student </span><br><span class="line"><span class="keyword">where</span> stu_birth <span class="keyword">between</span> <span class="string">&#x27;1980-1-1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1989-12-31&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 补充2：MySQL方言(使用数据库特有的函数)</span></span><br><span class="line"><span class="comment">-- 例如：Oracle中做同样事情的函数叫做decode</span></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">	stu_name <span class="keyword">as</span> 姓名, </span><br><span class="line">    if(stu_sex, <span class="string">&#x27;男&#x27;</span>, <span class="string">&#x27;女&#x27;</span>) <span class="keyword">as</span> 性别, </span><br><span class="line">    stu_birth <span class="keyword">as</span> 生日</span><br><span class="line"><span class="keyword">from</span> tb_student </span><br><span class="line"><span class="keyword">where</span> stu_birth <span class="keyword">between</span> <span class="string">&#x27;1980-1-1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1989-12-31&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询所有80后女学生的姓名和出生日期</span></span><br><span class="line"><span class="keyword">select</span> stu_name, stu_birth <span class="keyword">from</span> tb_student </span><br><span class="line"><span class="keyword">where</span> stu_birth <span class="keyword">between</span> <span class="string">&#x27;1980-1-1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1989-12-31&#x27;</span> <span class="keyword">and</span> stu_sex<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询所有的80后学生或女学生的姓名和出生日期</span></span><br><span class="line"><span class="keyword">select</span> stu_name, stu_birth <span class="keyword">from</span> tb_student </span><br><span class="line"><span class="keyword">where</span> stu_birth <span class="keyword">between</span> <span class="string">&#x27;1980-1-1&#x27;</span> <span class="keyword">and</span> <span class="string">&#x27;1989-12-31&#x27;</span> <span class="keyword">or</span> stu_sex<span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询姓“杨”的学生姓名和性别(模糊)</span></span><br><span class="line"><span class="comment">-- 在SQL中通配符%可以匹配零个或任意多个字符</span></span><br><span class="line"><span class="keyword">select</span> stu_name, stu_sex <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_name <span class="keyword">like</span> <span class="string">&#x27;杨%&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询姓“杨”名字两个字的学生姓名和性别(模糊)</span></span><br><span class="line"><span class="comment">-- 在SQL中通配符_可以刚刚好匹配一个字符</span></span><br><span class="line"><span class="keyword">select</span> stu_name, stu_sex <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_name <span class="keyword">like</span> <span class="string">&#x27;杨_&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询姓“杨”名字三个字的学生姓名和性别(模糊)</span></span><br><span class="line"><span class="keyword">select</span> stu_name, stu_sex <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_name <span class="keyword">like</span> <span class="string">&#x27;杨__&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询名字中有“不”字或“嫣”字的学生的姓名(模糊)</span></span><br><span class="line"><span class="comment">-- 提示：前面带%的模糊查询性能基本上都是非常糟糕的</span></span><br><span class="line"><span class="keyword">select</span> stu_name <span class="keyword">from</span> tb_student </span><br><span class="line"><span class="keyword">where</span> stu_name <span class="keyword">like</span> <span class="string">&#x27;%不%&#x27;</span> <span class="keyword">or</span> stu_name <span class="keyword">like</span> <span class="string">&#x27;%嫣%&#x27;</span>;</span><br><span class="line"></span><br><span class="line">update tb_student <span class="keyword">set</span> stu_name<span class="operator">=</span><span class="string">&#x27;岳不嫣&#x27;</span> <span class="keyword">where</span> stu_id<span class="operator">=</span><span class="number">1572</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 并集运算</span></span><br><span class="line"><span class="keyword">select</span> stu_name <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_name <span class="keyword">like</span> <span class="string">&#x27;%不%&#x27;</span></span><br><span class="line"><span class="keyword">union</span> </span><br><span class="line"><span class="keyword">select</span> stu_name <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_name <span class="keyword">like</span> <span class="string">&#x27;%嫣%&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> stu_name <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_name <span class="keyword">like</span> <span class="string">&#x27;%不%&#x27;</span></span><br><span class="line"><span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line"><span class="keyword">select</span> stu_name <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_name <span class="keyword">like</span> <span class="string">&#x27;%嫣%&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 正则表达式模糊查询</span></span><br><span class="line"><span class="keyword">select</span> stu_name, stu_sex <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_name regexp <span class="string">&#x27;^杨.&#123;2&#125;$&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询没有录入家庭住址的学生姓名(空值)</span></span><br><span class="line"><span class="comment">-- null作任何运算结果也是产生null，null相当于是条件不成立</span></span><br><span class="line"><span class="keyword">select</span> stu_name <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_addr <span class="keyword">is</span> <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">select</span> stu_name <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_addr<span class="operator">&lt;=&gt;</span><span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询录入了家庭住址的学生姓名(空值)</span></span><br><span class="line"><span class="keyword">select</span> stu_name <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_addr <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询学生选课的所有日期(去重)</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> sel_date <span class="keyword">from</span> tb_record;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询学生的家庭住址(去重)</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> stu_addr <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_addr <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询男学生的姓名和生日按年龄从大到小排列(排序)</span></span><br><span class="line"><span class="comment">-- asc - 升序（从小到大），desc - 降序（从大到小）</span></span><br><span class="line"><span class="keyword">select</span> stu_name, stu_birth <span class="keyword">from</span> tb_student </span><br><span class="line"><span class="keyword">where</span> stu_sex<span class="operator">=</span><span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> stu_birth <span class="keyword">asc</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> stu_name, stu_birth <span class="keyword">from</span> tb_student </span><br><span class="line"><span class="keyword">where</span> stu_sex<span class="operator">=</span><span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> stu_birth <span class="keyword">desc</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询年龄最大的学生的出生日期(聚合函数) ---&gt; 找出最小的生日</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">min</span>(stu_birth) <span class="keyword">from</span> tb_student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">	<span class="built_in">min</span>(stu_birth) <span class="keyword">as</span> 生日,</span><br><span class="line">    <span class="built_in">floor</span>(datediff(curdate(), <span class="built_in">min</span>(stu_birth))<span class="operator">/</span><span class="number">365</span>) <span class="keyword">as</span> 年龄</span><br><span class="line"><span class="keyword">from</span> tb_student;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询年龄最小的学生的出生日期(聚合函数)</span></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">	<span class="built_in">max</span>(stu_birth) <span class="keyword">as</span> 生日,</span><br><span class="line">    <span class="built_in">floor</span>(datediff(curdate(), <span class="built_in">max</span>(stu_birth))<span class="operator">/</span><span class="number">365</span>) <span class="keyword">as</span> 年龄</span><br><span class="line"><span class="keyword">from</span> tb_student;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询所有考试的平均成绩</span></span><br><span class="line"><span class="comment">-- 聚合函数在遇到null值会做忽略的处理</span></span><br><span class="line"><span class="comment">-- 如果做计数操作，建议使用count(*)，这样才不会漏掉空值</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(score) <span class="keyword">from</span> tb_record;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">sum</span>(score) <span class="operator">/</span> <span class="built_in">count</span>(score) <span class="keyword">from</span> tb_record;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">sum</span>(score) <span class="operator">/</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> tb_record;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询课程编号为1111的课程的平均成绩(筛选和聚合函数)</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(score) <span class="keyword">from</span> tb_record <span class="keyword">where</span> cid<span class="operator">=</span><span class="number">1111</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询学号为1001的学生所有课程的平均分(筛选和聚合函数)</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(score) <span class="keyword">from</span> tb_record <span class="keyword">where</span> sid<span class="operator">=</span><span class="number">1001</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="keyword">distinct</span> stu_addr) <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_addr <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询男女学生的人数(分组和聚合函数) </span></span><br><span class="line"><span class="comment">-- SAC（Split - Aggregate - Combine）</span></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">	if(stu_sex, <span class="string">&#x27;男&#x27;</span>, <span class="string">&#x27;女&#x27;</span>) <span class="keyword">as</span> 性别, </span><br><span class="line">    <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">as</span> 人数 </span><br><span class="line"><span class="keyword">from</span> tb_student <span class="keyword">group</span> <span class="keyword">by</span> stu_sex;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 统计每个学院男女学生的人数</span></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">	col_id <span class="keyword">as</span> 学院, </span><br><span class="line">    if(stu_sex, <span class="string">&#x27;男&#x27;</span>, <span class="string">&#x27;女&#x27;</span>) <span class="keyword">as</span> 性别, </span><br><span class="line">    <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">as</span> 人数 </span><br><span class="line"><span class="keyword">from</span> tb_student <span class="keyword">group</span> <span class="keyword">by</span> col_id, stu_sex;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询每个学生的学号和平均成绩(分组和聚合函数)</span></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">	sid <span class="keyword">as</span> 学号, </span><br><span class="line">    round(<span class="built_in">avg</span>(score),<span class="number">1</span>) <span class="keyword">as</span> 平均分 </span><br><span class="line"><span class="keyword">from</span> tb_record <span class="keyword">group</span> <span class="keyword">by</span> sid;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询平均成绩大于等于90分的学生的学号和平均成绩</span></span><br><span class="line"><span class="comment">-- 分组以前的数据筛选使用where子句，分组以后的数据筛选使用having子句</span></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">	sid <span class="keyword">as</span> 学号, </span><br><span class="line">    round(<span class="built_in">avg</span>(score),<span class="number">1</span>) <span class="keyword">as</span> 平均分 </span><br><span class="line"><span class="keyword">from</span> tb_record </span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> sid <span class="keyword">having</span> 平均分<span class="operator">&gt;=</span><span class="number">90</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询年龄最大的学生的姓名(子查询)</span></span><br><span class="line"><span class="comment">-- 嵌套查询：把一个查询的结果作为另外一个查询的一部分来使用。</span></span><br><span class="line"><span class="keyword">select</span> stu_name <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_birth<span class="operator">=</span>(</span><br><span class="line">	<span class="keyword">select</span> <span class="built_in">min</span>(stu_birth) <span class="keyword">from</span> tb_student</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询年龄最大的学生姓名和年龄(子查询+运算)</span></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">	stu_name <span class="keyword">as</span> 姓名,</span><br><span class="line">    <span class="built_in">floor</span>(datediff(curdate(), stu_birth) <span class="operator">/</span> <span class="number">365</span>) <span class="keyword">as</span> 年龄 </span><br><span class="line"><span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_birth<span class="operator">=</span>(</span><br><span class="line">	<span class="keyword">select</span> <span class="built_in">min</span>(stu_birth) <span class="keyword">from</span> tb_student</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询选了两门以上的课程的学生姓名(子查询/分组条件/集合运算)</span></span><br><span class="line"><span class="keyword">select</span> stu_name <span class="keyword">from</span> tb_student <span class="keyword">where</span> stu_id <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> sid <span class="keyword">from</span> tb_record <span class="keyword">group</span> <span class="keyword">by</span> sid <span class="keyword">having</span> <span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">&gt;</span><span class="number">2</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询课程的名称、学分和授课老师的姓名(连接查询)</span></span><br><span class="line"><span class="keyword">select</span> cou_name, cou_credit, tea_name </span><br><span class="line"><span class="keyword">from</span> tb_course, tb_teacher </span><br><span class="line"><span class="keyword">where</span> tb_course.tea_id<span class="operator">=</span>tb_teacher.tea_id;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> cou_name, cou_credit, tea_name <span class="keyword">from</span> tb_course t1 </span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> tb_teacher t2 <span class="keyword">on</span> t1.tea_id<span class="operator">=</span>t2.tea_id;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询学生姓名、课程名称以及成绩(连接查询)</span></span><br><span class="line"><span class="keyword">select</span> stu_name, cou_name, score </span><br><span class="line"><span class="keyword">from</span> tb_record, tb_student, tb_course</span><br><span class="line"><span class="keyword">where</span> stu_id<span class="operator">=</span>sid <span class="keyword">and</span> cou_id<span class="operator">=</span>cid <span class="keyword">and</span> score <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> stu_name, cou_name, score <span class="keyword">from</span> tb_student </span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> tb_record <span class="keyword">on</span> stu_id<span class="operator">=</span>sid </span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> tb_course <span class="keyword">on</span> cou_id<span class="operator">=</span>cid </span><br><span class="line"><span class="keyword">where</span> score <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询选课学生的姓名和平均成绩(子查询和连接查询)</span></span><br><span class="line"><span class="keyword">select</span> stu_name, avg_score </span><br><span class="line"><span class="keyword">from</span> tb_student, (<span class="keyword">select</span> sid, round(<span class="built_in">avg</span>(score),<span class="number">1</span>) <span class="keyword">as</span> avg_score </span><br><span class="line">	<span class="keyword">from</span> tb_record <span class="keyword">group</span> <span class="keyword">by</span> sid</span><br><span class="line">) tb_temp <span class="keyword">where</span> stu_id<span class="operator">=</span>sid;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查询每个学生的姓名和选课数量(左外连接和子查询)</span></span><br><span class="line"><span class="keyword">select</span> </span><br><span class="line">	stu_name <span class="keyword">as</span> 姓名, </span><br><span class="line">    ifnull(total, <span class="number">0</span>) <span class="keyword">as</span> 选课数量 </span><br><span class="line"><span class="keyword">from</span> tb_student <span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> (</span><br><span class="line">	<span class="keyword">select</span> sid, <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">as</span> total <span class="keyword">from</span> tb_record <span class="keyword">group</span> <span class="keyword">by</span> sid</span><br><span class="line">) tb_temp <span class="keyword">on</span> stu_id<span class="operator">=</span>sid;</span><br></pre></td></tr></table></figure>
+
+<p>上面的DML有几个地方需要加以说明：</p>
+<ol>
+<li><p>MySQL 中支持多种类型的运算符，包括：算术运算符（<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code>、<code>%</code>）、比较运算符（<code>=</code>、<code>&lt;&gt;</code>、<code>&lt;=&gt;</code>、<code>&lt;</code>、<code>&lt;=</code>、<code>&gt;</code>、<code>&gt;=</code>、<code>BETWEEN...AND..</code>.、<code>IN</code>、<code>IS NULL</code>、<code>IS NOT NULL</code>、<code>LIKE</code>、<code>RLIKE</code>、<code>REGEXP</code>）、逻辑运算符（<code>NOT</code>、<code>AND</code>、<code>OR</code>、<code>XOR</code>）和位运算符（<code>&amp;</code>、<code>|</code>、<code>^</code>、<code>~</code>、<code>&gt;&gt;</code>、<code>&lt;&lt;</code>），我们可以在 DML 中使用这些运算符处理数据。</p>
+</li>
+<li><p>在查询数据时，可以在<code>SELECT</code>语句及其子句（如<code>WHERE</code>子句、<code>ORDER BY</code>子句、<code>HAVING</code>子句等）中使用函数，这些函数包括字符串函数、数值函数、时间日期函数、流程函数等，如下面的表格所示。</p>
+<p>常用字符串函数。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CONCAT</td>
+<td>将多个字符串连接成一个字符串</td>
+</tr>
+<tr>
+<td>FORMAT</td>
+<td>将数值格式化成字符串并指定保留几位小数</td>
+</tr>
+<tr>
+<td>FROM_BASE64 / TO_BASE64</td>
+<td>BASE64解码/编码</td>
+</tr>
+<tr>
+<td>BIN / OCT / HEX</td>
+<td>将数值转换成二进制/八进制/十六进制字符串</td>
+</tr>
+<tr>
+<td>LOCATE</td>
+<td>在字符串中查找一个子串的位置</td>
+</tr>
+<tr>
+<td>LEFT / RIGHT</td>
+<td>返回一个字符串左边/右边指定长度的字符</td>
+</tr>
+<tr>
+<td>LENGTH / CHAR_LENGTH</td>
+<td>返回字符串的长度以字节/字符为单位</td>
+</tr>
+<tr>
+<td>LOWER / UPPER</td>
+<td>返回字符串的小写/大写形式</td>
+</tr>
+<tr>
+<td>LPAD / RPAD</td>
+<td>如果字符串的长度不足，在字符串左边/右边填充指定的字符</td>
+</tr>
+<tr>
+<td>LTRIM / RTRIM</td>
+<td>去掉字符串前面/后面的空格</td>
+</tr>
+<tr>
+<td>ORD / CHAR</td>
+<td>返回字符对应的编码/返回编码对应的字符</td>
+</tr>
+<tr>
+<td>STRCMP</td>
+<td>比较字符串，返回-1、0、1分别表示小于、等于、大于</td>
+</tr>
+<tr>
+<td>SUBSTRING</td>
+<td>返回字符串指定范围的子串</td>
+</tr>
+</tbody></table>
+<p>常用数值函数。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ABS</td>
+<td>返回一个数的绝度值</td>
+</tr>
+<tr>
+<td>CEILING / FLOOR</td>
+<td>返回一个数上取整/下取整的结果</td>
+</tr>
+<tr>
+<td>CONV</td>
+<td>将一个数从一种进制转换成另一种进制</td>
+</tr>
+<tr>
+<td>CRC32</td>
+<td>计算循环冗余校验码</td>
+</tr>
+<tr>
+<td>EXP / LOG / LOG2 / LOG10</td>
+<td>计算指数/对数</td>
+</tr>
+<tr>
+<td>POW</td>
+<td>求幂</td>
+</tr>
+<tr>
+<td>RAND</td>
+<td>返回[0,1)范围的随机数</td>
+</tr>
+<tr>
+<td>ROUND</td>
+<td>返回一个数四舍五入后的结果</td>
+</tr>
+<tr>
+<td>SQRT</td>
+<td>返回一个数的平方根</td>
+</tr>
+<tr>
+<td>TRUNCATE</td>
+<td>截断一个数到指定的精度</td>
+</tr>
+<tr>
+<td>SIN / COS / TAN / COT / ASIN / ACOS / ATAN</td>
+<td>三角函数</td>
+</tr>
+</tbody></table>
+<p>常用时间日期函数。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CURDATE / CURTIME / NOW</td>
+<td>获取当前日期/时间/日期和时间</td>
+</tr>
+<tr>
+<td>ADDDATE / SUBDATE</td>
+<td>将两个日期表达式相加/相减并返回结果</td>
+</tr>
+<tr>
+<td>DATE / TIME</td>
+<td>从字符串中获取日期/时间</td>
+</tr>
+<tr>
+<td>YEAR / MONTH / DAY</td>
+<td>从日期中获取年/月/日</td>
+</tr>
+<tr>
+<td>HOUR / MINUTE / SECOND</td>
+<td>从时间中获取时/分/秒</td>
+</tr>
+<tr>
+<td>DATEDIFF / TIMEDIFF</td>
+<td>返回两个时间日期表达式相差多少天/小时</td>
+</tr>
+<tr>
+<td>MAKEDATE / MAKETIME</td>
+<td>制造一个日期/时间</td>
+</tr>
+</tbody></table>
+<p>常用流程函数。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IF</td>
+<td>根据条件是否成立返回不同的值</td>
+</tr>
+<tr>
+<td>IFNULL</td>
+<td>如果为NULL则返回指定的值否则就返回本身</td>
+</tr>
+<tr>
+<td>NULLIF</td>
+<td>两个表达式相等就返回NULL否则返回第一个表达式的值</td>
+</tr>
+</tbody></table>
+<p>其他常用函数。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MD5 / SHA1 / SHA2</td>
+<td>返回字符串对应的哈希摘要</td>
+</tr>
+<tr>
+<td>CHARSET / COLLATION</td>
+<td>返回字符集/校对规则</td>
+</tr>
+<tr>
+<td>USER / CURRENT_USER</td>
+<td>返回当前用户</td>
+</tr>
+<tr>
+<td>DATABASE</td>
+<td>返回当前数据库名</td>
+</tr>
+<tr>
+<td>VERSION</td>
+<td>返回当前数据库版本</td>
+</tr>
+<tr>
+<td>FOUND_ROWS / ROW_COUNT</td>
+<td>返回查询到的行数/受影响的行数</td>
+</tr>
+<tr>
+<td>LAST_INSERT_ID</td>
+<td>返回最后一个自增主键的值</td>
+</tr>
+<tr>
+<td>UUID / UUID_SHORT</td>
+<td>返回全局唯一标识符</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h4 id="DCL（数据控制语言）"><a href="#DCL（数据控制语言）" class="headerlink" title="DCL（数据控制语言）"></a>DCL（数据控制语言）</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 创建可以远程登录的root账号并为其指定口令</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;123456&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 为远程登录的root账号授权操作所有数据库所有对象的所有权限并允许其将权限再次赋予其他用户</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> privileges <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> <span class="keyword">with</span> <span class="keyword">grant</span> option;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建名为hellokitty的用户并为其指定口令</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;hellokitty&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;123123&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 将对school数据库所有对象的所有操作权限授予hellokitty</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">all</span> privileges <span class="keyword">on</span> school.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;hellokitty&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 召回hellokitty对school数据库所有对象的insert/delete/update权限</span></span><br><span class="line"><span class="keyword">revoke</span> <span class="keyword">insert</span>, <span class="keyword">delete</span>, update <span class="keyword">on</span> school.<span class="operator">*</span> <span class="keyword">from</span> <span class="string">&#x27;hellokitty&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>说明：创建一个可以允许任意主机登录并且具有超级管理员权限的用户在现实中并不是一个明智的决定，因为一旦该账号的口令泄露或者被破解，数据库将会面临灾难级的风险。</p>
+</blockquote>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>索引是关系型数据库中用来提升查询性能最为重要的手段。关系型数据库中的索引就像一本书的目录，我们可以想象一下，如果要从一本书中找出某个知识点，但是这本书没有目录，这将是意见多么可怕的事情（我们估计得一篇一篇的翻下去，才能确定这个知识点到底在什么位置）。创建索引虽然会带来存储空间上的开销，就像一本书的目录会占用一部分的篇幅一样，但是在牺牲空间后换来的查询时间的减少也是非常显著的。</p>
+<p>MySQL中，所有数据类型的列都可以被索引，常用的存储引擎InnoDB和MyISAM能支持每个表创建16个索引。InnoDB和MyISAM使用的索引其底层算法是B-tree（B树），B-tree是一种自平衡的树，类似于平衡二叉排序树，能够保持数据有序。这种数据结构能够让查找数据、顺序访问、插入数据及删除的操作都在对数时间内完成。</p>
+<p>接下来我们通过一个简单的例子来说明索引的意义，比如我们要根据学生的姓名来查找学生，这个场景在实际开发中应该经常遇到，就跟通过商品名称查找商品道理是一样的。我们可以使用MySQL的<code>explain</code>关键字来查看SQL的执行计划。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb_student <span class="keyword">where</span> stuname<span class="operator">=</span><span class="string">&#x27;林震南&#x27;</span>\G</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">*************************** 1. row ***************************</span><br><span class="line">           id: 1</span><br><span class="line">  select_type: SIMPLE</span><br><span class="line">        table: tb_student</span><br><span class="line">   partitions: NULL</span><br><span class="line">         type: ALL</span><br><span class="line">possible_keys: NULL</span><br><span class="line">          key: NULL</span><br><span class="line">      key_len: NULL</span><br><span class="line">          ref: NULL</span><br><span class="line">         rows: 11</span><br><span class="line">     filtered: 10.00</span><br><span class="line">        Extra: Using where</span><br><span class="line">1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>在上面的SQL执行计划中，有几项值得我们关注：</p>
+<ol>
+<li><code>select_type</code>：查询的类型。<ul>
+<li>SIMPLE：简单SELECT，不需要使用UNION操作或子查询。</li>
+<li>PRIMARY：如果查询包含子查询，最外层的SELECT被标记为PRIMARY。</li>
+<li>UNION：UNION操作中第二个或后面的SELECT语句。</li>
+<li>SUBQUERY：子查询中的第一个SELECT。</li>
+<li>DERIVED：派生表的SELECT子查询。</li>
+</ul>
+</li>
+<li><code>table</code>：查询对应的表。</li>
+<li><code>type</code>：MySQL在表中找到满足条件的行的方式，也称为访问类型，包括：ALL（全表扫描）、index（索引全扫描，只遍历索引树）、range（索引范围扫描）、ref（非唯一索引扫描）、eq_ref（唯一索引扫描）、const/system（常量级查询）、NULL（不需要访问表或索引）。在所有的访问类型中，很显然ALL是性能最差的，它代表的全表扫描是指要扫描表中的每一行才能找到匹配的行。</li>
+<li><code>possible_keys</code>：MySQL可以选择的索引，但是<strong>有可能不会使用</strong>。</li>
+<li><code>key</code>：MySQL真正使用的索引，如果为NULL就表示没有使用索引。</li>
+<li><code>key_len</code>：使用的索引的长度，在不影响查询的情况下肯定是长度越短越好。</li>
+<li><code>rows</code>：执行查询需要扫描的行数，这是一个<strong>预估值</strong>。</li>
+<li><code>extra</code>：关于查询额外的信息。<ul>
+<li><code>Using filesort</code>：MySQL无法利用索引完成排序操作。</li>
+<li><code>Using index</code>：只使用索引的信息而不需要进一步查表来获取更多的信息。</li>
+<li><code>Using temporary</code>：MySQL需要使用临时表来存储结果集，常用于分组和排序。</li>
+<li><code>Impossible where</code>：<code>where</code>子句会导致没有符合条件的行。</li>
+<li><code>Distinct</code>：MySQL发现第一个匹配行后，停止为当前的行组合搜索更多的行。</li>
+<li><code>Using where</code>：查询的列未被索引覆盖，筛选条件并不是索引的前导列。</li>
+</ul>
+</li>
+</ol>
+<p>从上面的执行计划可以看出，当我们通过学生名字查询学生时实际上是进行了全表扫描，不言而喻这个查询性能肯定是非常糟糕的，尤其是在表中的行很多的时候。如果我们需要经常通过学生姓名来查询学生，那么就应该在学生姓名对应的列上创建索引，通过索引来加速查询。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> index idx_student_name <span class="keyword">on</span> tb_student(stuname);</span><br></pre></td></tr></table></figure>
+
+<p>再次查看刚才的SQL对应的执行计划。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb_student <span class="keyword">where</span> stuname<span class="operator">=</span><span class="string">&#x27;林震南&#x27;</span>\G</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">*************************** 1. row ***************************</span><br><span class="line">           id: 1</span><br><span class="line">  select_type: SIMPLE</span><br><span class="line">        table: tb_student</span><br><span class="line">   partitions: NULL</span><br><span class="line">         type: ref</span><br><span class="line">possible_keys: idx_student_name</span><br><span class="line">          key: idx_student_name</span><br><span class="line">      key_len: 62</span><br><span class="line">          ref: const</span><br><span class="line">         rows: 1</span><br><span class="line">     filtered: 100.00</span><br><span class="line">        Extra: NULL</span><br><span class="line">1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>可以注意到，在对学生姓名创建索引后，刚才的查询已经不是全表扫描而是基于索引的查询，而且扫描的行只有唯一的一行，这显然大大的提升了查询的性能。MySQL中还允许创建前缀索引，即对索引字段的前N个字符创建索引，这样的话可以减少索引占用的空间（但节省了空间很有可能会浪费时间，<strong>时间和空间是不可调和的矛盾</strong>），如下所示。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> index idx_student_name_1 <span class="keyword">on</span> tb_student(stuname(<span class="number">1</span>));</span><br></pre></td></tr></table></figure>
+
+<p>上面的索引相当于是根据学生姓名的第一个字来创建的索引，我们再看看SQL执行计划。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> tb_student <span class="keyword">where</span> stuname<span class="operator">=</span><span class="string">&#x27;林震南&#x27;</span>\G</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">*************************** 1. row ***************************</span><br><span class="line">           id: 1</span><br><span class="line">  select_type: SIMPLE</span><br><span class="line">        table: tb_student</span><br><span class="line">   partitions: NULL</span><br><span class="line">         type: ref</span><br><span class="line">possible_keys: idx_student_name</span><br><span class="line">          key: idx_student_name</span><br><span class="line">      key_len: 5</span><br><span class="line">          ref: const</span><br><span class="line">         rows: 2</span><br><span class="line">     filtered: 100.00</span><br><span class="line">        Extra: Using where</span><br><span class="line">1 row in set, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p>不知道大家是否注意到，这一次扫描的行变成了2行，因为学生表中有两个姓“林”的学生，我们只用姓名的第一个字作为索引的话，在查询时通过索引就会找到这两行。</p>
+<p>如果要删除索引，可以使用下面的SQL。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> tb_student <span class="keyword">drop</span> index idx_student_name;</span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> index idx_student_name <span class="keyword">on</span> tb_student;</span><br></pre></td></tr></table></figure>
+
+<p>我们简单的为大家总结一下索引的设计原则：</p>
+<ol>
+<li><strong>最适合</strong>索引的列是出现在<strong>WHERE子句</strong>和连接子句中的列。</li>
+<li>索引列的基数越大（取值多重复值少），索引的效果就越好。</li>
+<li>使用<strong>前缀索引</strong>可以减少索引占用的空间，内存中可以缓存更多的索引。</li>
+<li><strong>索引不是越多越好</strong>，虽然索引加速了读操作（查询），但是写操作（增、删、改）都会变得更慢，因为数据的变化会导致索引的更新，就如同书籍章节的增删需要更新目录一样。</li>
+<li>使用InnoDB存储引擎时，表的普通索引都会保存主键的值，所以<strong>主键要尽可能选择较短的数据类型</strong>，这样可以有效的减少索引占用的空间，利用提升索引的缓存效果。</li>
+</ol>
+<p>最后，还有一点需要说明，InnoDB使用的B-tree索引，数值类型的列除了等值判断时索引会生效之外，使用&gt;、&lt;、&gt;=、&lt;=、BETWEEN…AND… 、&lt;&gt;时，索引仍然生效；对于字符串类型的列，如果使用不以通配符开头的模糊查询，索引也是起作用的，但是其他的情况会导致索引失效，这就意味着很有可能会做全表查询。</p>
+<h3 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h3><p>视图是关系型数据库中将一组查询指令构成的结果集组合成可查询的数据表的对象。简单的说，视图就是虚拟的表，但与数据表不同的是，数据表是一种实体结构，而视图是一种虚拟结构，你也可以将视图理解为保存在数据库中被赋予名字的SQL语句。</p>
+<p>使用视图可以获得以下好处：</p>
+<ol>
+<li>可以将实体数据表隐藏起来，让外部程序无法得知实际的数据结构，让访问者可以使用表的组成部分而不是整个表，降低数据库被攻击的风险。</li>
+<li>在大多数的情况下视图是只读的（更新视图的操作通常都有诸多的限制），外部程序无法直接透过视图修改数据。</li>
+<li>重用SQL语句，将高度复杂的查询包装在视图表中，直接访问该视图即可取出需要的数据；也可以将视图视为数据表进行连接查询。</li>
+<li>视图可以返回与实体数据表不同格式的数据，</li>
+</ol>
+<p>创建视图。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> vw_avg_score </span><br><span class="line"><span class="keyword">as</span> </span><br><span class="line">    <span class="keyword">select</span> sid, round(<span class="built_in">avg</span>(score), <span class="number">1</span>) <span class="keyword">as</span> avgscore </span><br><span class="line">    <span class="keyword">from</span> tb_record <span class="keyword">group</span> <span class="keyword">by</span> sid;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">view</span> vw_student_score </span><br><span class="line"><span class="keyword">as</span> </span><br><span class="line">    <span class="keyword">select</span> stuname, avgscore </span><br><span class="line">    <span class="keyword">from</span> tb_student, vw_avg_score </span><br><span class="line">    <span class="keyword">where</span> stuid<span class="operator">=</span>sid;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>提示</strong>：因为视图不包含数据，所以每次使用视图时，都必须执行查询以获得数据，如果你使用了连接查询、嵌套查询创建了较为复杂的视图，你可能会发现查询性能下降得很厉害。因此，在使用复杂的视图前，应该进行测试以确保其性能能够满足应用的需求。</p>
+</blockquote>
+<p>使用视图。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> stuname, avgscore <span class="keyword">from</span> vw_student_score <span class="keyword">order</span> <span class="keyword">by</span> avgscore <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+--------------+----------+</span><br><span class="line">| stuname      | avgscore |</span><br><span class="line">+--------------+----------+</span><br><span class="line">| 杨过         |     95.6 |</span><br><span class="line">| 任我行       |     53.5 |</span><br><span class="line">| 王语嫣       |     84.3 |</span><br><span class="line">| 纪嫣然       |     73.8 |</span><br><span class="line">| 岳不群       |     78.0 |</span><br><span class="line">| 东方不败     |     88.0 |</span><br><span class="line">| 项少龙       |     92.0 |</span><br><span class="line">+--------------+----------+</span><br></pre></td></tr></table></figure>
+
+<p>既然视图是一张虚拟的表，那么视图的中的数据可以更新吗？视图的可更新性要视具体情况而定，以下类型的视图是不能更新的：</p>
+<ol>
+<li>使用了聚合函数（SUM、MIN、MAX、AVG、COUNT等）、DISTINCT、GROUP BY、HAVING、UNION或者UNION ALL的视图。</li>
+<li>SELECT中包含了子查询的视图。</li>
+<li>FROM子句中包含了一个不能更新的视图的视图。</li>
+<li>WHERE子句的子查询引用了FROM子句中的表的视图。</li>
+</ol>
+<p>删除视图。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">view</span> vw_student_score;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>说明</strong>：如果希望更新视图，可以先用上面的命令删除视图，也可以通过<code>create or replace view</code>来更新视图。</p>
+</blockquote>
+<p>视图的规则和限制。</p>
+<ol>
+<li>视图可以嵌套，可以利用从其他视图中检索的数据来构造一个新的视图。视图也可以和表一起使用。</li>
+<li>创建视图时可以使用<code>order by</code>子句，但如果从视图中检索数据时也使用了<code>order by</code>，那么该视图中原先的<code>order by</code>会被覆盖。</li>
+<li>视图无法使用索引，也不会激发触发器（实际开发中因为性能等各方面的考虑，通常不建议使用触发器，所以我们也不对这个概念进行介绍）的执行。</li>
+</ol>
+<h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><p>过程（又称存储过程）是事先编译好存储在数据库中的一组SQL的集合，调用过程可以简化应用程序开发人员的工作，减少与数据库服务器之间的通信，对于提升数据操作的性能也是有帮助的。其实迄今为止，我们使用的SQL语句都是针对一个或多个表的单条语句，但在实际开发中经常会遇到某个操作需要多条SQL语句才能完成的情况。例如，电商网站在受理用户订单时，需要做以下一系列的处理。 </p>
+<ol>
+<li>通过查询来核对库存中是否有对应的物品以及库存是否充足。</li>
+<li>如果库存有物品，需要锁定库存以确保这些物品不再卖给别人， 并且要减少可用的物品数量以反映正确的库存量。</li>
+<li>如果库存不足，可能需要进一步与供应商进行交互或者至少产生一条系统提示消息。 </li>
+<li>不管受理订单是否成功，都需要产生流水记录，而且需要给对应的用户产生一条通知信息。 </li>
+</ol>
+<p>我们可以通过过程将复杂的操作封装起来，这样不仅有助于保证数据的一致性，而且将来如果业务发生了变动，只需要调整和修改过程即可。对于调用过程的用户来说，过程并没有暴露数据表的细节，而且执行过程比一条条的执行一组SQL要快得多。</p>
+<p>下面的过程实现了查询某门课程的最高分、最低分和平均分。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">procedure</span> if <span class="keyword">exists</span> sp_score_by_cid;</span><br><span class="line"></span><br><span class="line">delimiter $$</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> sp_score_by_cid(</span><br><span class="line">	courseId <span class="type">int</span>, </span><br><span class="line">	<span class="keyword">out</span> maxScore <span class="type">decimal</span>(<span class="number">4</span>,<span class="number">1</span>), </span><br><span class="line">	<span class="keyword">out</span> minScore <span class="type">decimal</span>(<span class="number">4</span>,<span class="number">1</span>),</span><br><span class="line">	<span class="keyword">out</span> avgScore <span class="type">decimal</span>(<span class="number">4</span>,<span class="number">1</span>)</span><br><span class="line">)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">select</span> <span class="built_in">max</span>(score) <span class="keyword">into</span> maxScore <span class="keyword">from</span> tb_record </span><br><span class="line">		<span class="keyword">where</span> cid<span class="operator">=</span>courseId;</span><br><span class="line">	<span class="keyword">select</span> <span class="built_in">min</span>(score) <span class="keyword">into</span> minScore <span class="keyword">from</span> tb_record </span><br><span class="line">		<span class="keyword">where</span> cid<span class="operator">=</span>courseId;</span><br><span class="line">	<span class="keyword">select</span> <span class="built_in">avg</span>(score) <span class="keyword">into</span> avgScore <span class="keyword">from</span> tb_record </span><br><span class="line">		<span class="keyword">where</span> cid<span class="operator">=</span>courseId;</span><br><span class="line"><span class="keyword">end</span> $$</span><br><span class="line"></span><br><span class="line">delimiter ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">call</span> sp_score_by_cid(<span class="number">1111</span>, <span class="variable">@a</span>, <span class="variable">@b</span>, <span class="variable">@c</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="variable">@a</span>, <span class="variable">@b</span>, <span class="variable">@c</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>说明</strong>：在定义过程时，因为可能需要书写多条SQL，而分隔这些SQL需要使用分号作为分隔符，如果这个时候，仍然用分号表示整段代码结束，那么定义过程的SQL就会出现错误，所以上面我们用<code>delimiter $$</code>将整段代码结束的标记定义为<code>$$</code>，那么代码中的分号将不再表示整段代码的结束，整段代码只会在遇到<code>end $$</code>时才会执行。在定义完过程后，通过<code>delimiter ;</code>将结束符重新改回成分号（恢复现场）。</p>
+</blockquote>
+<p>上面定义的过程有四个参数，其中第一个参数是输入参数，代表课程的编号，后面的参数都是输出参数，因为过程不能定义返回值，只能通过输出参数将执行结果带出，定义输出参数的关键字是<code>out</code>，默认情况下参数都是输入参数。</p>
+<p>调用过程。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">call</span> sp_score_by_cid(<span class="number">1111</span>, <span class="variable">@a</span>, <span class="variable">@b</span>, <span class="variable">@c</span>);</span><br></pre></td></tr></table></figure>
+
+<p>获取输出参数的值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="variable">@a</span> <span class="keyword">as</span> 最高分, <span class="variable">@b</span> <span class="keyword">as</span> 最低分, <span class="variable">@c</span> <span class="keyword">as</span> 平均分;</span><br></pre></td></tr></table></figure>
+
+<p>删除过程。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">procedure</span> sp_score_by_cid;</span><br></pre></td></tr></table></figure>
+
+<p>在过程中，我们可以定义变量、条件，可以使用分支和循环语句，可以通过游标操作查询结果，还可以使用事件调度器，这些内容我们暂时不在此处进行介绍。虽然我们说了很多过程的好处，但是在实际开发中，如果过度的使用过程并将大量复杂的运算放到过程中，必然会导致占用数据库服务器的CPU资源，造成数据库服务器承受巨大的压力。为此，我们一般会将复杂的运算和处理交给应用服务器，因为很容易部署多台应用服务器来分摊这些压力。</p>
+<h3 id="MySQL8窗口函数"><a href="#MySQL8窗口函数" class="headerlink" title="MySQL8窗口函数"></a>MySQL8窗口函数</h3><p>MySQL从8.0开始支持窗口函数，大多数商业数据库和一些开源数据库早已提供了对窗口函数的支持，有的也将其称之为OLAP（联机分析和处理）函数，听名字就知道跟统计和分析相关。为了帮助大家理解窗口函数，我们先说说窗口的概念。</p>
+<p>窗口可以理解为记录的集合，窗口函数也就是在满足某种条件的记录集合上执行的特殊函数，对于每条记录都要在此窗口内执行函数。窗口函数和我们上面讲到的聚合函数比较容易混淆，二者的区别主要在于聚合函数是将多条记录聚合为一条记录，窗口函数是每条记录都会执行，执行后记录条数不会变。窗口函数不仅仅是几个函数，它是一套完整的语法，函数只是该语法的一部分，基本语法如下所示：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&lt;</span>窗口函数<span class="operator">&gt;</span> <span class="keyword">over</span> (<span class="keyword">partition</span> <span class="keyword">by</span> <span class="operator">&lt;</span>用于分组的列名<span class="operator">&gt;</span> <span class="keyword">order</span> <span class="keyword">by</span> <span class="operator">&lt;</span>用户排序的列名<span class="operator">&gt;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上面语法中，窗口函数的位置可以放以下两种函数：</p>
+<ol>
+<li>专用窗口函数，包括：<code>rank</code>、<code>dense_rank</code>和<code>row_number</code>等。</li>
+<li>聚合函数，包括：<code>sum</code>、<code>avg</code>、<code>max</code>、<code>min</code>和<code>count</code>等。</li>
+</ol>
+<p>（按照上课讲的内容自行补充）</p>
+<blockquote>
+<p><strong>参考链接</strong>：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/92654574">https://zhuanlan.zhihu.com/p/92654574</a>。</p>
+</blockquote>
+<h3 id="其他内容"><a href="#其他内容" class="headerlink" title="其他内容"></a>其他内容</h3><h4 id="范式理论"><a href="#范式理论" class="headerlink" title="范式理论"></a>范式理论</h4><p>范式理论是设计关系型数据库中二维表的指导思想。</p>
+<ol>
+<li>第一范式：数据表的每个列的值域都是由原子值组成的，不能够再分割。</li>
+<li>第二范式：数据表里的所有数据都要和该数据表的键（主键与候选键）有完全依赖关系。</li>
+<li>第三范式：所有非键属性都只和候选键有相关性，也就是说非键属性之间应该是独立无关的。</li>
+</ol>
+<h4 id="数据完整性"><a href="#数据完整性" class="headerlink" title="数据完整性"></a>数据完整性</h4><ol>
+<li><p>实体完整性 - 每个实体都是独一无二的</p>
+<ul>
+<li>主键（primary key） / 唯一约束 / 唯一索引（unique）</li>
+</ul>
+</li>
+<li><p>引用完整性（参照完整性）- 关系中不允许引用不存在的实体</p>
+<ul>
+<li>外键（foreign key）</li>
+</ul>
+</li>
+<li><p>域完整性 - 数据是有效的</p>
+<ul>
+<li><p>数据类型及长度</p>
+</li>
+<li><p>非空约束（not null）</p>
+</li>
+<li><p>默认值约束（default）</p>
+</li>
+<li><p>检查约束（check）</p>
+<blockquote>
+<p><strong>说明</strong>：在MySQL数据库中，检查约束并不起作用。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="数据一致性"><a href="#数据一致性" class="headerlink" title="数据一致性"></a>数据一致性</h4><ol>
+<li><p>事务：一系列对数据库进行读/写的操作，这些操作要么全都成功，要么全都失败。</p>
+</li>
+<li><p>事务的ACID特性</p>
+<ul>
+<li>原子性：事务作为一个整体被执行，包含在其中的对数据库的操作要么全部被执行，要么都不执行</li>
+<li>一致性：事务应确保数据库的状态从一个一致状态转变为另一个一致状态</li>
+<li>隔离性：多个事务并发执行时，一个事务的执行不应影响其他事务的执行</li>
+<li>持久性：已被提交的事务对数据库的修改应该永久保存在数据库中</li>
+</ul>
+</li>
+<li><p>MySQL中的事务操作</p>
+<ul>
+<li><p>开启事务环境</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">start</span> transaction</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">begin</span></span><br></pre></td></tr></table></figure></li>
+<li><p>提交事务</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">commit</span></span><br></pre></td></tr></table></figure></li>
+<li><p>回滚事务</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">rollback</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<p>大家应该能够想到，关于MySQL的知识肯定远远不止上面列出的这些，比如MySQL的性能优化、管理和维护MySQL的相关工具、MySQL数据的备份和恢复、监控MySQL、部署高可用架构等问题我们在这里都没有进行讨论。当然，这些内容也都是跟项目开发密切相关的，我们就留到有需要的时候再进行讲解。</p>
+<h3 id="Python数据库编程"><a href="#Python数据库编程" class="headerlink" title="Python数据库编程"></a>Python数据库编程</h3><p>我们用如下所示的数据库来演示在Python中如何访问MySQL数据库。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> database if <span class="keyword">exists</span> hrs;</span><br><span class="line"><span class="keyword">create</span> database hrs <span class="keyword">default</span> charset utf8;</span><br><span class="line"></span><br><span class="line">use hrs;</span><br><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> tb_emp;</span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">table</span> if <span class="keyword">exists</span> tb_dept;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb_dept</span><br><span class="line">(</span><br><span class="line">dno   <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;编号&#x27;</span>,</span><br><span class="line">dname <span class="type">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;名称&#x27;</span>,</span><br><span class="line">dloc  <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;所在地&#x27;</span>,</span><br><span class="line"><span class="keyword">primary</span> key (dno)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb_dept <span class="keyword">values</span> </span><br><span class="line">	(<span class="number">10</span>, <span class="string">&#x27;会计部&#x27;</span>, <span class="string">&#x27;北京&#x27;</span>),</span><br><span class="line">	(<span class="number">20</span>, <span class="string">&#x27;研发部&#x27;</span>, <span class="string">&#x27;成都&#x27;</span>),</span><br><span class="line">	(<span class="number">30</span>, <span class="string">&#x27;销售部&#x27;</span>, <span class="string">&#x27;重庆&#x27;</span>),</span><br><span class="line">	(<span class="number">40</span>, <span class="string">&#x27;运维部&#x27;</span>, <span class="string">&#x27;深圳&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tb_emp</span><br><span class="line">(</span><br><span class="line">eno   <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;员工编号&#x27;</span>,</span><br><span class="line">ename <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;员工姓名&#x27;</span>,</span><br><span class="line">job   <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;员工职位&#x27;</span>,</span><br><span class="line">mgr   <span class="type">int</span> comment <span class="string">&#x27;主管编号&#x27;</span>,</span><br><span class="line">sal   <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;员工月薪&#x27;</span>,</span><br><span class="line">comm  <span class="type">int</span> comment <span class="string">&#x27;每月补贴&#x27;</span>,</span><br><span class="line">dno   <span class="type">int</span> comment <span class="string">&#x27;所在部门编号&#x27;</span>,</span><br><span class="line"><span class="keyword">primary</span> key (eno)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> tb_emp <span class="keyword">add</span> <span class="keyword">constraint</span> fk_emp_dno <span class="keyword">foreign</span> key (dno) <span class="keyword">references</span> tb_dept (dno);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> tb_emp <span class="keyword">values</span> </span><br><span class="line">	(<span class="number">7800</span>, <span class="string">&#x27;张三丰&#x27;</span>, <span class="string">&#x27;总裁&#x27;</span>, <span class="keyword">null</span>, <span class="number">9000</span>, <span class="number">1200</span>, <span class="number">20</span>),</span><br><span class="line">	(<span class="number">2056</span>, <span class="string">&#x27;乔峰&#x27;</span>, <span class="string">&#x27;分析师&#x27;</span>, <span class="number">7800</span>, <span class="number">5000</span>, <span class="number">1500</span>, <span class="number">20</span>),</span><br><span class="line">	(<span class="number">3088</span>, <span class="string">&#x27;李莫愁&#x27;</span>, <span class="string">&#x27;设计师&#x27;</span>, <span class="number">2056</span>, <span class="number">3500</span>, <span class="number">800</span>, <span class="number">20</span>),</span><br><span class="line">	(<span class="number">3211</span>, <span class="string">&#x27;张无忌&#x27;</span>, <span class="string">&#x27;程序员&#x27;</span>, <span class="number">2056</span>, <span class="number">3200</span>, <span class="keyword">null</span>, <span class="number">20</span>),</span><br><span class="line">	(<span class="number">3233</span>, <span class="string">&#x27;丘处机&#x27;</span>, <span class="string">&#x27;程序员&#x27;</span>, <span class="number">2056</span>, <span class="number">3400</span>, <span class="keyword">null</span>, <span class="number">20</span>),</span><br><span class="line">	(<span class="number">3251</span>, <span class="string">&#x27;张翠山&#x27;</span>, <span class="string">&#x27;程序员&#x27;</span>, <span class="number">2056</span>, <span class="number">4000</span>, <span class="keyword">null</span>, <span class="number">20</span>),</span><br><span class="line">	(<span class="number">5566</span>, <span class="string">&#x27;宋远桥&#x27;</span>, <span class="string">&#x27;会计师&#x27;</span>, <span class="number">7800</span>, <span class="number">4000</span>, <span class="number">1000</span>, <span class="number">10</span>),</span><br><span class="line">	(<span class="number">5234</span>, <span class="string">&#x27;郭靖&#x27;</span>, <span class="string">&#x27;出纳&#x27;</span>, <span class="number">5566</span>, <span class="number">2000</span>, <span class="keyword">null</span>, <span class="number">10</span>),</span><br><span class="line">	(<span class="number">3344</span>, <span class="string">&#x27;黄蓉&#x27;</span>, <span class="string">&#x27;销售主管&#x27;</span>, <span class="number">7800</span>, <span class="number">3000</span>, <span class="number">800</span>, <span class="number">30</span>),</span><br><span class="line">	(<span class="number">1359</span>, <span class="string">&#x27;胡一刀&#x27;</span>, <span class="string">&#x27;销售员&#x27;</span>, <span class="number">3344</span>, <span class="number">1800</span>, <span class="number">200</span>, <span class="number">30</span>),</span><br><span class="line">	(<span class="number">4466</span>, <span class="string">&#x27;苗人凤&#x27;</span>, <span class="string">&#x27;销售员&#x27;</span>, <span class="number">3344</span>, <span class="number">2500</span>, <span class="keyword">null</span>, <span class="number">30</span>),</span><br><span class="line">	(<span class="number">3244</span>, <span class="string">&#x27;欧阳锋&#x27;</span>, <span class="string">&#x27;程序员&#x27;</span>, <span class="number">3088</span>, <span class="number">3200</span>, <span class="keyword">null</span>, <span class="number">20</span>),</span><br><span class="line">	(<span class="number">3577</span>, <span class="string">&#x27;杨过&#x27;</span>, <span class="string">&#x27;会计&#x27;</span>, <span class="number">5566</span>, <span class="number">2200</span>, <span class="keyword">null</span>, <span class="number">10</span>),</span><br><span class="line">	(<span class="number">3588</span>, <span class="string">&#x27;朱九真&#x27;</span>, <span class="string">&#x27;会计&#x27;</span>, <span class="number">5566</span>, <span class="number">2500</span>, <span class="keyword">null</span>, <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在Python 3中，我们通常使用纯Python的三方库PyMySQL来访问MySQL数据库，它应该是目前Python操作MySQL数据库最好的选择。</p>
+<ol>
+<li><p>安装PyMySQL。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure></li>
+<li><p>添加一个部门。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    no = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;编号: &#x27;</span>))</span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&#x27;名字: &#x27;</span>)</span><br><span class="line">    loc = <span class="built_in">input</span>(<span class="string">&#x27;所在地: &#x27;</span>)</span><br><span class="line">    <span class="comment"># 1. 创建数据库连接对象</span></span><br><span class="line">    con = pymysql.connect(host=<span class="string">&#x27;localhost&#x27;</span>, port=<span class="number">3306</span>,</span><br><span class="line">                          database=<span class="string">&#x27;hrs&#x27;</span>, charset=<span class="string">&#x27;utf8&#x27;</span>,</span><br><span class="line">                          user=<span class="string">&#x27;yourname&#x27;</span>, password=<span class="string">&#x27;yourpass&#x27;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 2. 通过连接对象获取游标</span></span><br><span class="line">        <span class="keyword">with</span> con.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">            <span class="comment"># 3. 通过游标执行SQL并获得执行结果</span></span><br><span class="line">            result = cursor.execute(</span><br><span class="line">                <span class="string">&#x27;insert into tb_dept values (%s, %s, %s)&#x27;</span>,</span><br><span class="line">                (no, name, loc)</span><br><span class="line">            )</span><br><span class="line">        <span class="keyword">if</span> result == <span class="number">1</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;添加成功!&#x27;</span>)</span><br><span class="line">        <span class="comment"># 4. 操作成功提交事务</span></span><br><span class="line">        con.commit()</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        <span class="comment"># 5. 关闭连接释放资源</span></span><br><span class="line">        con.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></li>
+<li><p>删除一个部门。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    no = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;编号: &#x27;</span>))</span><br><span class="line">    con = pymysql.connect(host=<span class="string">&#x27;localhost&#x27;</span>, port=<span class="number">3306</span>,</span><br><span class="line">                          database=<span class="string">&#x27;hrs&#x27;</span>, charset=<span class="string">&#x27;utf8&#x27;</span>,</span><br><span class="line">                          user=<span class="string">&#x27;yourname&#x27;</span>, password=<span class="string">&#x27;yourpass&#x27;</span>,</span><br><span class="line">                          autocommit=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> con.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">            result = cursor.execute(</span><br><span class="line">                <span class="string">&#x27;delete from tb_dept where dno=%s&#x27;</span>,</span><br><span class="line">                (no, )</span><br><span class="line">            )</span><br><span class="line">        <span class="keyword">if</span> result == <span class="number">1</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;删除成功!&#x27;</span>)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        con.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>说明：如果不希望每次SQL操作之后手动提交或回滚事务，可以像上面的代码那样，在创建连接的时候多加一个名为<code>autocommit</code>的参数并将它的值设置为<code>True</code>，表示每次执行SQL之后自动提交。如果程序中不需要使用事务环境也不希望手动的提交或回滚就可以这么做。</p>
+</blockquote>
+</li>
+<li><p>更新一个部门。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    no = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;编号: &#x27;</span>))</span><br><span class="line">    name = <span class="built_in">input</span>(<span class="string">&#x27;名字: &#x27;</span>)</span><br><span class="line">    loc = <span class="built_in">input</span>(<span class="string">&#x27;所在地: &#x27;</span>)</span><br><span class="line">    con = pymysql.connect(host=<span class="string">&#x27;localhost&#x27;</span>, port=<span class="number">3306</span>,</span><br><span class="line">                          database=<span class="string">&#x27;hrs&#x27;</span>, charset=<span class="string">&#x27;utf8&#x27;</span>,</span><br><span class="line">                          user=<span class="string">&#x27;yourname&#x27;</span>, password=<span class="string">&#x27;yourpass&#x27;</span>,</span><br><span class="line">                          autocommit=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> con.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">            result = cursor.execute(</span><br><span class="line">                <span class="string">&#x27;update tb_dept set dname=%s, dloc=%s where dno=%s&#x27;</span>,</span><br><span class="line">                (name, loc, no)</span><br><span class="line">            )</span><br><span class="line">        <span class="keyword">if</span> result == <span class="number">1</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;更新成功!&#x27;</span>)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        con.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></li>
+<li><p>查询所有部门。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">from</span> pymysql.cursors <span class="keyword">import</span> DictCursor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    con = pymysql.connect(host=<span class="string">&#x27;localhost&#x27;</span>, port=<span class="number">3306</span>,</span><br><span class="line">                          database=<span class="string">&#x27;hrs&#x27;</span>, charset=<span class="string">&#x27;utf8&#x27;</span>,</span><br><span class="line">                          user=<span class="string">&#x27;yourname&#x27;</span>, password=<span class="string">&#x27;yourpass&#x27;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> con.cursor(cursor=DictCursor) <span class="keyword">as</span> cursor:</span><br><span class="line">            cursor.execute(<span class="string">&#x27;select dno as no, dname as name, dloc as loc from tb_dept&#x27;</span>)</span><br><span class="line">            results = cursor.fetchall()</span><br><span class="line">            <span class="built_in">print</span>(results)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;编号\t名称\t\t所在地&#x27;</span>)</span><br><span class="line">            <span class="keyword">for</span> dept <span class="keyword">in</span> results:</span><br><span class="line">                <span class="built_in">print</span>(dept[<span class="string">&#x27;no&#x27;</span>], end=<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">                <span class="built_in">print</span>(dept[<span class="string">&#x27;name&#x27;</span>], end=<span class="string">&#x27;\t&#x27;</span>)</span><br><span class="line">                <span class="built_in">print</span>(dept[<span class="string">&#x27;loc&#x27;</span>])</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        con.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></li>
+<li><p>分页查询员工信息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">from</span> pymysql.cursors <span class="keyword">import</span> DictCursor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Emp</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, no, name, job, sal</span>):</span></span><br><span class="line">        self.no = no</span><br><span class="line">        self.name = name</span><br><span class="line">        self.job = job</span><br><span class="line">        self.sal = sal</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&#x27;\n编号：<span class="subst">&#123;self.no&#125;</span>\n姓名：<span class="subst">&#123;self.name&#125;</span>\n职位：<span class="subst">&#123;self.job&#125;</span>\n月薪：<span class="subst">&#123;self.sal&#125;</span>\n&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    page = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;页码: &#x27;</span>))</span><br><span class="line">    size = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;大小: &#x27;</span>))</span><br><span class="line">    con = pymysql.connect(host=<span class="string">&#x27;localhost&#x27;</span>, port=<span class="number">3306</span>,</span><br><span class="line">                          database=<span class="string">&#x27;hrs&#x27;</span>, charset=<span class="string">&#x27;utf8&#x27;</span>,</span><br><span class="line">                          user=<span class="string">&#x27;yourname&#x27;</span>, password=<span class="string">&#x27;yourpass&#x27;</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> con.cursor() <span class="keyword">as</span> cursor:</span><br><span class="line">            cursor.execute(</span><br><span class="line">                <span class="string">&#x27;select eno as no, ename as name, job, sal from tb_emp limit %s,%s&#x27;</span>,</span><br><span class="line">                ((page - <span class="number">1</span>) * size, size)</span><br><span class="line">            )</span><br><span class="line">            <span class="keyword">for</span> emp_tuple <span class="keyword">in</span> cursor.fetchall():</span><br><span class="line">                emp = Emp(*emp_tuple)</span><br><span class="line">                <span class="built_in">print</span>(emp)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        con.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yolukami.com/2021/10/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93MySQL/" data-id="ckvuq2l1i00036son4csh6smv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/10/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          mysql数据库基础
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">数据分析流程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MySQL数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/">Python基础学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">Python算法入门</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">markdown基本语法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">October 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">September 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/07/">July 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/">mysql数据库基础</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/11/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93MySQL/">关系型数据库MySQL</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/13/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B/">数据分析流程</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/13/python%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/">基础排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2021/09/13/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/Python%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">Python基础学习（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 Yolukami<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
